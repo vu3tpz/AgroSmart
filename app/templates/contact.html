@@ -1,0 +1,223 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>Agro Smart</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'about.css' %}">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-sm sticky-top bg-dark">
+            <div class="container-fluid"><a class="navbar-brand text-center" href="#" style="margin: 0px 0px;"><b>AGRO SMART</b></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav text-light ml-auto">
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'index' %}"><b><i class="fas fa-home"></i>Home</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'about' %}"><b><i class="fas fa-info-circle"></i>About</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href=#><b><i class="fas fa-paper-plane"></i>Contact</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_signup' %}"><b><i class="fas fa-user-plus"></i>Create Account</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_login' %}"><b><i class="fas fa-sign-in-alt"></i>Login</b></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section id="contact">
+            <div class="container">
+              <div class="section-header">
+                <h3 class="section-title">Contact</h3>
+                <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+              </div>
+            </div>
+
+            <div class="container mt-5">
+              <div class="row justify-content-center">
+      
+                <div class="col-lg-3 col-md-4">
+      
+                  <div class="info">
+                    <div>
+                      <i class="bi bi-geo-alt"></i>
+                      <p>A108 Adam Street<br>New York, NY 535022</p>
+                    </div>
+      
+                    <div>
+                      <i class="bi bi-envelope"></i>
+                      <p>info@example.com</p>
+                    </div>
+      
+                    <div>
+                      <i class="bi bi-phone"></i>
+                      <p>+1 5589 55488 55s</p>
+                    </div>
+                  </div>
+      
+                  <div class="social-links">
+                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                  </div>
+      
+                </div>
+      
+                <div class="col-lg-5 col-md-8">
+                  <div class="form">
+                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                      <div class="form-group">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                      </div>
+                      <div class="form-group mt-3">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                      </div>
+                      <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                      </div>
+                      <div class="form-group mt-3">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                      </div>
+                      <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                      </div>
+                      <div class="text-center"><button type="submit">Send Message</button></div>
+                    </form>
+                  </div>
+                </div>
+      
+              </div>
+      
+            </div>
+          </section><!-- End Contact Section -->
+
+          <style>
+              #contact {
+                  background: #f7f7f7;
+                  padding: 80px 0 40px 0;
+                }
+                #contact .info {
+                  color: #333333;
+                }
+                #contact .info i {
+                  font-size: 32px;
+                  color: #2dc997;
+                  float: left;
+                  line-height: 0;
+                }
+                #contact .info p {
+                  padding: 0 0 10px 50px;
+                  margin-bottom: 20px;
+                  line-height: 22px;
+                  font-size: 14px;
+                }
+                #contact .info .email p {
+                  padding-top: 5px;
+                }
+                #contact .social-links {
+                  padding: 20px 0;
+                }
+                #contact .social-links a {
+                  font-size: 18px;
+                  background: #333;
+                  color: #fff;
+                  line-height: 1;
+                  border-radius: 50%;
+                  text-align: center;
+                  width: 36px;
+                  height: 36px;
+                  transition: 0.3s;
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+                #contact .social-links a i {
+                  line-height: 0;
+                }
+                #contact .social-links a:hover {
+                  background: #2dc997;
+                  color: #fff;
+                }
+                #contact .php-email-form .error-message {
+                  display: none;
+                  color: #fff;
+                  background: #ed3c0d;
+                  text-align: left;
+                  padding: 15px;
+                  font-weight: 600;
+                }
+                #contact .php-email-form .error-message br + br {
+                  margin-top: 25px;
+                }
+                #contact .php-email-form .sent-message {
+                  display: none;
+                  color: #fff;
+                  background: #18d26e;
+                  text-align: center;
+                  padding: 15px;
+                  font-weight: 600;
+                }
+                #contact .php-email-form .loading {
+                  display: none;
+                  background: #fff;
+                  text-align: center;
+                  padding: 15px;
+                }
+                #contact .php-email-form .loading:before {
+                  content: "";
+                  display: inline-block;
+                  border-radius: 50%;
+                  width: 24px;
+                  height: 24px;
+                  margin: 0 10px -6px 0;
+                  border: 3px solid #18d26e;
+                  border-top-color: #eee;
+                  -webkit-animation: animate-loading 1s linear infinite;
+                  animation: animate-loading 1s linear infinite;
+                }
+                #contact .php-email-form input, #contact .php-email-form textarea {
+                  border-radius: 0;
+                  box-shadow: none;
+                  font-size: 14px;
+                }
+                #contact .php-email-form input::focus, #contact .php-email-form textarea::focus {
+                  background-color: #2dc997;
+                }
+                #contact .php-email-form button[type=submit] {
+                  background: #2dc997;
+                  border: 0;
+                  padding: 10px 24px;
+                  color: #fff;
+                  transition: 0.4s;
+                }
+                #contact .php-email-form button[type=submit]:hover {
+                  background: #51d8ad;
+                }
+                @-webkit-keyframes animate-loading {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+                @keyframes animate-loading {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+          </style>
+
+    </body>
+</html>

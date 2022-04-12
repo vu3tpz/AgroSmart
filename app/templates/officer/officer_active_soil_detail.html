@@ -1,0 +1,54 @@
+{% extends "officer/officer_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'officer/officer_active_soil_detail.css' %}">
+
+<!-- Page content -->
+<div class="content">
+
+    <div class="form-group">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <h1><u><b>Details of Soil</b></u></h1>
+
+    <div class="addsoildetail">
+        <a class="btn btn-success" href="{% url 'officer_add_soil_detail' %}"><i class="fas fa-plus-circle"></i>Add Soil Detail</a>
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">SL NO.</th>
+                <th scope="col">Soil</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Crops</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in soils %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{s.soil}}</td>
+                <td>{{s.detail}}</td>
+                <td>{{s.crop}}</td>
+                <td><a class="btn btn-danger" href="{% url 'delete_soil_detail_active' %}?soil_id={{s.pk}}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

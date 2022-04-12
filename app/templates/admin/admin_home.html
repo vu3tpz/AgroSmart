@@ -1,0 +1,108 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>Agro Smart</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/admin_home.css' %}">
+
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark">
+        <div class="container-fluid"><a class="navbar-brand text-center" href="#" style="margin: 0px 0px;">AGRO SMART</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav text-light ml-auto">
+                    <li class="nav-item" role="presentation"><a class="user"><i class="fas fa-user-circle"></i>{{user.username}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <a href="{% url 'admin_home' %}"><i class="fas fa-home"></i>Home</a>
+        <a href="{% url 'admin_profile' %}"><i class="fas fa-address-card"></i>Profile</a>
+        <a href="{% url 'admin_active_visitor' %}"><i class="fas fa-users"></i>Manage Visitor</a>
+        <a href="{% url 'admin_active_seller' %}"><i class="fas fa-users"></i>Manage Seller</a>
+        <a href="{% url 'admin_active_officer' %}"><i class="fas fa-user-tie"></i>Manage Officer</a>
+        <a href="{% url 'admin_active_admin' %}"><i class="fas fa-user-shield"></i>Manage Admin</a>
+        <a href="{% url 'admin_active_soil' %}"><i class="fas fa-seedling"></i>Manage Soil in Location</a>
+        <a href="{% url 'admin_active_soil_detail' %}"><i class="fas fa-seedling"></i>Manage Detail of Soil</a>
+        <a href="{% url 'admin_active_rainfall' %}"><i class="fas fa-cloud-showers-heavy"></i>Manage Rainfall</a>
+        <a href="{% url 'admin_active_crop' %}"><i class="fas fa-seedling"></i>Manage Crop</a>
+
+        <div class="logout">
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+    </div>
+
+    {% block content %}
+    
+    <!-- Page content -->
+    <div class="content">
+        <h1><u><b>Home</b></u></h1>
+        <div class="welcome">
+            <p><b>Agriculture, with its allied sectors, is unquestionably the largest livelihood provider in India, more so in the vast rural areas. It product (GDP). Sustainable agriculture, in terms of food security, rural employment, and environmentally Sustainable technologies such as soil conservation, Sustainable natural resourse management and biodiversity protection, are essential for holistic rural development.</b></p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-user-cog"></i><U><b>Verify Visitors</b></U></h5>
+                        <p class="card-text"><b>Visitors are waiting for your Approval to access the Website, Make Fast..</b></p>
+                        <a href="{% url 'admin_approve_visitor' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-user-cog"></i><U><b>Verify Officers</b></U></h5>
+                        <p class="card-text"><b>Officers are waiting to Help us and Serve People Verify them to server People..</b></p>
+                        <a href="{% url 'admin_approve_officer' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approve Soil</b></U></h5>
+                        <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Soils...</b></p>
+                        <a href="{% url 'admin_approve_soil' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-cloud-showers-heavy"></i><U><b>Approve Crop</b></U></h5>
+                        <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Crop...</b></p>
+                        <a href="{% url 'admin_approve_crop' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+    </body>
+</html>

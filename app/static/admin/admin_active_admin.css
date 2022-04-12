@@ -1,0 +1,19 @@
+div.addadmin{
+    float: right;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+
+ul{
+    list-style-type: none;
+    list-style: none;
+    align-items: center;
+}
+
+.form-group{
+    text-align: center;
+}
+
+tr{
+    text-align: center;
+}

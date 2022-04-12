@@ -1,0 +1,32 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_profile.css' %}">
+
+    <!-- Page content -->
+    <div class="content">
+        <h1><u><b>Profile</b></u></h1>
+
+        <div class="profile">
+            <pre><b>Name          :</b>   {{user.admin.get_name}}</pre>
+            <pre><b>Username   :</b>   {{user.username}} </pre>
+            <pre><b>Email          :</b>   {{user.admin.email}} </pre>
+            <pre><b>Gender        :</b>   {{user.admin.gender}} </pre>
+            <pre><b>District        :</b>   {{user.admin.district}} </pre>
+            <pre><b>Joindate      :</b>   {{user.admin.joindate}} </pre>
+        </div>
+
+        <hr>
+<center>
+        <div class="row">
+            <div>
+                <h3>Change Password</h3>
+                <div>
+                    <a href="{% url 'change_password_admin' %}" class="btn btn-success">Change</a>
+                </div>
+            </div>
+        </div>
+</center>
+    </div>
+    
+{% endblock %}

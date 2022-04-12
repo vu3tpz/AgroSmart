@@ -1,0 +1,25 @@
+{% extends "officer/officer_home.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'officer/officer_add_soil_detail.css' %}">
+
+<div class="content">
+    
+    <form method="POST">
+        {% csrf_token %} 
+        <div class="container">
+            <h1><u>Add Soil Details</u></h1>
+            
+            <hr>
+
+            {{ form | crispy }}
+
+            <hr>
+            
+            <button type="submit" class="btn btn-primary" >Add</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

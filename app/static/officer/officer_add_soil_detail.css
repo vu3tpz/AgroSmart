@@ -1,0 +1,45 @@
+input[type=text], textarea{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, textarea:focus {
+    background-color: #ddd;
+    outline: none;
+    font-weight: bold;
+}
+
+textarea{
+    height: 150px;
+}
+
+.btn-primary {
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    font-weight: bold;
+}
+
+h1{
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.form-group{
+    font-weight: bold;
+}
+
+.form-control{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}

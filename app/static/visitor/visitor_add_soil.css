@@ -1,0 +1,44 @@
+input[type=text], select{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, select:focus {
+    background-color: #ddd;
+    outline: none;
+    font-weight: bold;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+h1{
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.form-control{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-group{
+    font-weight: bold;
+}
+  
+ul{
+    list-style-type: none;
+    list-style: none;
+    align-items: center;
+}

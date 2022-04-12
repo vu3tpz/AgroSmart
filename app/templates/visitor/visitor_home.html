@@ -1,0 +1,163 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>Agro Smart</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_home.css' %}">
+
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark">
+        <div class="container-fluid"><a class="navbar-brand text-center" href="#" style="margin: 0px 0px;">AGRO SMART</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav text-light ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_market_home' %}"><i class="fas fa-shopping-cart"></i>Virtual Market</a></li>
+                    <li class="nav-item" role="presentation"><a class="bar">|</a></li>
+                    <li class="nav-item" role="presentation"><a class="user"><i class="fas fa-user-circle"></i>{{user.visitor.get_name}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <a href="{% url 'visitor_home' %}"><i class="fas fa-home"></i>Home</a>
+        <a href="{% url 'visitor_profile' %}"><i class="fas fa-address-card"></i>Profile</a>
+        <a href="{% url 'visitor_find_soil' %}"><i class="fas fa-search-location"></i>Find Soil in Your Location</a>
+        <a href="{% url 'visitor_find_soil_detail' %}"><i class="fas fa-search-plus"></i>Details about Soil</a>
+
+        <a href="{% url 'visitor_find_rainfall' %}"><i class="fas fa-cloud-sun-rain"></i>Find Rainfall</a>
+
+        <a href="{% url 'visitor_find_crop' %}"><i class="fas fa-cloud-sun-rain"></i>Find Crop</a>
+        
+        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Request for Seed<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'visitor_get_seed' %}"><i class="fas fa-seedling"></i>Get Seed</a>
+            <a href="{% url 'visitor_seed_request' %}"><i class="fas fa-cogs"></i>View request</a>
+        </div>
+
+        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Request for Fertilizer<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'visitor_get_fertilizer' %}"><i class="fas fa-seedling"></i>Get Fertilizer</a>
+            <a href="{% url 'visitor_fertilizer_request' %}"><i class="fas fa-cogs"></i>View Request</a>
+        </div>
+
+        <button class="dropdown-btn"><i class="fas fa-users"></i>Contribute<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'visitor_add_soil' %}"><i class="fas fa-user-seedling"></i>Add soil in Location</a>
+            <a href="{% url 'visitor_add_crop' %}"><i class="fas fa-user-seedling"></i>Add Crop</a>
+        </div>
+
+        <a href="{% url 'visitor_market_home' %}"><i class="fas fa-shopping-cart"></i>Virtual Market</a>
+        
+        <div class="logout">
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+    </div>
+
+    <script>
+        //* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } 
+                else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
+
+    {% block content %}
+    
+    <!-- Page content -->
+    <div class="content">
+        
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <h1><u><b>Home</b></u></h1>
+        <div class="welcome">
+            <p><b>Agriculture, with its allied sectors, is unquestionably the largest livelihood provider in India, more so in the vast rural areas. It product (GDP). Sustainable agriculture, in terms of food security, rural employment, and environmentally Sustainable technologies such as soil conservation, Sustainable natural resourse management and biodiversity protection, are essential for holistic rural development.</b></p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Find Soil</b></U></h5>
+                        <p class="card-text"><b>Find Soil of your location, it is more easy to find the soil for your agriculture..</b></p>
+                        <a href="{% url 'visitor_find_soil' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-cloud-showers-heavy"></i><U><b>Find Rainfall</b></U></h5>
+                        <p class="card-text"><b>Find rainfall of your location, it is more easy to find the Rainfall for your agriculture..</b></p>
+                        <a href="{% url 'visitor_find_rainfall' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Contribute Soil location details</b></U></h5>
+                        <p class="card-text"><b>Contribute Location in soil details and help user...</b></p>
+                        <a href="{% url 'visitor_add_soil' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Contribute Crop details</b></U></h5>
+                        <p class="card-text"><b>Contribute crop details details and help user...</b></p>
+                        <a href="{% url 'visitor_add_crop' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+    </body>
+</html>

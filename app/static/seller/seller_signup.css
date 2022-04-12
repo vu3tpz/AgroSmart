@@ -1,0 +1,151 @@
+h1{
+    text-align: center;
+    padding-top: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 40px;
+    margin: 0;
+}
+
+label{
+    font-weight: bold;
+}
+
+input[type=text], input[type=password],input[type=email]{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+    font-weight: bold;
+}
+
+textarea{
+    height: 150px;
+}
+
+.submit button{
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    height: 45px;
+    font-weight: bold;
+}
+
+.btn-group{
+    padding-top: 20px;
+}
+
+.btn-group a{
+    width: 100px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.container{
+    width: 75%;
+    background-color: white;
+    margin-right: 0;
+}
+
+.sidestyle {
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color:#f1f1f1;
+    position: fixed;
+    height: 93%;
+    overflow: auto;
+}
+
+.sidestyle h1{
+    font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+    padding-top: 150px;
+    font-style: bold;
+
+}
+
+.sidestyle p{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sidestyle a{
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    font-weight: bold;
+}
+
+.form-control{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+div.dropdown-menu{
+    min-width: 3rem;
+    left: 20%;
+}
+
+.fas {
+    padding-right: 4px;
+}
+
+.nav-item{
+    padding-left: 10px;
+}
+
+.general-area-home{
+    padding-left: 30px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+ul{
+    list-style-type: none;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #dcddd4;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+  }
+  
+  .navbar .navbar-nav .nav-link:hover{
+    color: #fff;
+  }
+  
+  .navbar .navbar-nav .nav-link::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #2dc997;
+    color: transparent;
+    width: 0%;
+    content: '.';
+    height: 3px;
+    transition: all 0.5s;
+  }
+  
+  .navbar .navbar-nav .nav-link:hover::after{
+    width: 100%;
+  }

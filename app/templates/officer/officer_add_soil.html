@@ -1,0 +1,44 @@
+{% extends "officer/officer_home.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'officer/officer_add_soil.css' %}">
+
+<div class="content">
+
+    <form method="POST" id="soiladdForm" data-regions-url="{% url 'ajax_load_regions' %}">
+        {% csrf_token %} 
+        <div class="container">
+            <h1><u>Add Soil Details and location</u></h1>
+            
+            <hr>
+
+            {{ form | crispy }}
+
+            <hr>
+            
+            <button type="submit" class="btn btn-primary" >Add</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $("#id_district").change(function() {
+            const url = $("#soiladdForm").attr("data-regions-url");
+            const districtId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data:{
+                    'district_id': districtId
+                },
+                success: function(data){
+                    console.log(data)
+                    $("#id_region").html(data);
+                } 
+            });
+        });
+    </script>
+</div>
+
+{% endblock %}

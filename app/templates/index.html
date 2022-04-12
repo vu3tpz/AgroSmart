@@ -1,0 +1,75 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>Agro Smart</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-sm sticky-top">
+            <div class="container-fluid"><a class="navbar-brand text-center" href="#" style="margin: 0px 0px;"><b>AGRO SMART</b></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div
+                    class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav text-light ml-auto">
+                        <li class="nav-item active" role="presentation"><a class="nav-link" href="{% url 'index' %}"><b><i class="fas fa-home"></i>Home</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'about' %}"><b><i class="fas fa-info-circle"></i>About</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'contact' %}"><b><i class="fas fa-paper-plane"></i>Contact</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_signup' %}"><b><i class="fas fa-user-plus"></i>Create Account</b></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_login' %}"><b><i class="fas fa-sign-in-alt"></i>Login</b></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <script>
+            //* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
+    
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } 
+                    else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+        </script>
+        
+        <section class="general-area-home">
+            <div class="title">
+                <h1><b>Find Your Soil</b></h1>
+                <p><b>Know more about Crops & Soils</b></p>
+                <center><a href="{% url 'about' %}" class="btn btn-outline-primary">Know More</a></center>
+            </div>
+        </section>
+
+
+    </body>
+</html>

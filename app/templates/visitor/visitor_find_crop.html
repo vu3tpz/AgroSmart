@@ -1,0 +1,69 @@
+{% extends "visitor/visitor_home.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_find_crop.css' %}">
+
+<div class="content">
+    <h1><u><b>Find Crop</b></u></h1><br>
+    <form method="POST">
+        {% csrf_token %} 
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.nitrogen | as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.phosphorus | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.potassium | as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.temperature | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.humidity | as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.ph | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.rainfall | as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                <div class="submit">
+                    <button type="submit" class="btn btn-primary" >Find</button>
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+    <div class="row">
+        <h2>{{result}}</h2>
+    </div>
+</div>
+
+<style>
+    div .submit{
+        padding-top: 22px;
+        padding-left: 150px;
+        padding-right: 20px;
+    }
+    .submit button{
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 20%;
+        height: 45px;
+        font-weight: bold;
+    }
+</style>
+
+{% endblock %}

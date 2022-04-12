@@ -1,0 +1,44 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/admin_active_crop.css' %}">
+ 
+    <!-- Page content -->
+    <div class="content">
+        
+        <div class="btn-group float-right">
+            <a href="{% url 'admin_active_crop' %}" class="btn btn-primary"><i class="fas fa-seedling"></i>Active</a>
+            <a href="{% url 'admin_approve_crop' %}" class="btn btn-secondary"><i class="fas fa-cogs"></i>Request</a>
+            <a href="{% url 'admin_add_crop' %}" class="btn btn-secondary"><i class="fas fa-plus-circle"></i>Add</a>
+        </div>
+
+        <h1><u><b>Active Crops</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Crop</th>
+                    <th scope="col">Soil</th>
+                    <th scope="col">Min Rainfall</th>
+                    <th scope="col">Max Rainfall</th>
+                    <th scope="col">Detail</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in crops %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{c.crop}}</td>
+                    <td>{{c.soil}}</td>
+                    <td>{{c.min_rainfall}}</td>
+                    <td>{{c.max_rainfall}}</td>
+                    <td>{{c.detail}}</td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_crop_active' %}?crop_id={{c.pk}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

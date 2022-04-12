@@ -1,0 +1,54 @@
+{% extends "officer/officer_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'officer/officer_active_crop.css' %}">
+ 
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <h1><u><b>Approved Fertilizer Request</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Fertilizer</th>
+                    <th scope="col">Quantity(in Gram)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in ferts %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{f.name}}</td>
+                    <td>{{f.username}}</td>
+                    <td>{{f.email}}</td>
+                    <td>{{f.address}}</td>
+                    <td>{{f.district}}</td>
+                    <td>{{f.fertilizer}}</td>
+                    <td>{{f.quantity}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

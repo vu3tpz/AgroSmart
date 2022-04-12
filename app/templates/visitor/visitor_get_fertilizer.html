@@ -1,0 +1,34 @@
+{% extends "visitor/visitor_home.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_add_crop.css' %}">
+
+<div class="content">
+
+    <form method="POST">
+        {% csrf_token %} 
+        <div class="container">
+            <h1><u>Get Fertilizer</u></h1>
+            
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.fertilizer | as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.quantity | as_crispy_field }}
+                </div>
+            </div>
+
+            {{ form.address | as_crispy_field }}
+
+            <hr>
+            
+            <button type="submit" class="btn btn-primary" >Get</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+div.addsoil{
+    float: right;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+
+.form-group ul{
+    text-align: center;
+    padding-top: 10px;
+}
+
+ul{
+    list-style-type: none;
+    list-style: none;
+    align-items: center;
+}
+
+tr{
+    text-align: center;
+}

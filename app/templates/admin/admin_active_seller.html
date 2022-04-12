@@ -1,0 +1,41 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="btn-group float-right">
+            <a href="{% url 'admin_active_seller' %}" class="btn btn-primary"><i class="fas fa-user-check"></i>Active</a>
+            <a href="{% url 'admin_approve_seller' %}" class="btn btn-secondary"><i class="fas fa-user-cog"></i>Request</a>
+        </div>
+
+        <h1><u><b>Active Sellers</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Brand Name</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Joining Date</th>
+                    <th scope="col">Detail View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in sellers %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{s.get_name}}</td>
+                    <td>{{s.garden}}</td>
+                    <td>{{s.district}}</td>
+                    <td>{{s.joindate}}</td>
+                    <td><a class="btn btn-success" href="{% url 'detail_active_seller'  s.id %}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

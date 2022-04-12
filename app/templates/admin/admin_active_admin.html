@@ -1,0 +1,46 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/admin_active_admin.css' %}">
+
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="btn-group float-right">
+            <a href="{% url 'admin_add_admin' %}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>Add Admin</a>
+        </div>
+
+        <h1><u><b>Active Admins</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Joining Date</th>
+                    <th scope="col">Delete Admin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in admins %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <td>{{a.get_name}}</td>
+                    <td>{{a.get_username}}</td>
+                    <td>{{a.email}}</td>
+                    <td>{{a.gender}}</td>
+                    <td>{{a.district}}</td>
+                    <td>{{a.joindate}}</td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_admin_active' %}?admin_id={{a.pk}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+div.content h1{
+  text-align: center;
+  padding-top: 10px;
+}
+
+pre{
+    font-size: 26px;
+    padding-left: 20px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.profile{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

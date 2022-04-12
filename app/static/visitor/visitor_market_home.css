@@ -1,0 +1,126 @@
+/* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 20%;
+  background-color:#f1f1f1;
+  position: fixed;
+  height: 93%;
+  overflow: auto;
+}
+  
+  /* Sidebar links */
+.sidebar a, .dropdown-btn, .dropdown-container a {
+    display: block;
+    color: black;
+    padding: 13px;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    background: none;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.logout{
+    display: block;
+    color: black;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logout a{
+    text-align: center;
+}
+  
+  /* Links on mouse-over */
+.sidebar a:hover:not(.active), .dropdown-btn:hover:not(.active), .dropdown-container a:hover:not(.active) {
+    background-color: #04AA6D;
+    color: white;
+}
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  padding: 1px 16px;
+  height: auto;
+  width: 80%;
+  float: right;
+}
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar a, .dropdown-btn, .dropdown-container a {float: left;}
+    div.content {margin-left: 0;}
+}
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+    .sidebar a, .dropdown-btn, .dropdown-container a {
+        text-align: center;
+        float: none;
+    }
+}
+  
+  /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    display: none;
+    color: black;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+}
+  
+  /* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.fas {
+    padding-right: 10px;
+}
+
+.far{
+  padding-right: 10px;
+}
+
+.nav-item{
+    font-size: 17px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-right: 25px;
+}
+
+div.content h1{
+  text-align: center;
+  padding-top: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+div.row{
+  padding-top: 25px
+}
+
+ul{
+  list-style-type: none;
+  list-style: none;
+  align-items: center;
+}
+
+div.search{
+  align-items: center;
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5px;
+}

@@ -1,0 +1,118 @@
+.form-group{
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+ul{
+    list-style-type: none;
+    list-style: none;
+    align-items: center;
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    background-image: url('../static/image/agropic1.jpg');
+    background-size: cover;
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.title{
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 2;
+    font-family: sans-serif;
+}
+
+.title h1{
+    font-size: 60px;
+    color: #dcddd4;
+    text-align: center;
+    margin: 0;
+    text-shadow: 2px 2px black;
+}
+
+.title p{
+    font-size: 20px;
+    color: #dcddd4;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 6px;
+    margin-top: 10px;
+    text-shadow: 2px 2px black;
+    padding-bottom: 25px;
+}
+
+div.dropdown-menu{
+    min-width: 3rem;
+    left: 25%;
+}
+
+.fas {
+    padding-right: 4px;
+}
+
+.nav-item{
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.navbar-brand{
+    text-shadow: 2px 2px black;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #dcddd4;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+}
+
+.navbar .navbar-nav .nav-link:hover{
+    color: #fff;
+}
+
+.navbar .navbar-nav .nav-link::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #2dc997;
+    color: transparent;
+    width: 0%;
+    content: '.';
+    height: 3px;
+    transition: all 0.5s;
+}
+
+.navbar .navbar-nav .nav-link:hover::after{
+    width: 100%;
+}
+
+a.btn-outline-primary{
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 50px;
+    transition: 0.5s;
+    margin: 10px;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+a.btn-outline-primary:hover{
+    background: #2dc997;
+    border: 2px solid #2dc997;
+}

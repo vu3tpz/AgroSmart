@@ -1,0 +1,58 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>Agro Smart</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_market_home.css' %}">
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark">
+        <div class="container-fluid"><a class="navbar-brand text-center" href="#" style="margin: 0px 0px;">AGRO SMART</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav text-light ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_home' %}"><i class="far fa-arrow-alt-circle-left"></i>Find More</a></li>
+                    <li class="nav-item" role="presentation"><a class="bar">|</a></li>
+                    <li class="nav-item" role="presentation"><a class="user"><i class="fas fa-user-circle"></i>{{user.visitor.get_name}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <a href="{% url 'visitor_market_home' %}"><i class="fas fa-home"></i>Home</a>
+
+        <div class="logout">
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+    </div>
+
+    {% block content %}
+    
+    <!-- Page content -->
+    <div class="content">
+        <div class="search">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-10">
+                        <input type="text" class="form-control" placeholder="Search What you need..!">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}
+
+    </body>
+</html>

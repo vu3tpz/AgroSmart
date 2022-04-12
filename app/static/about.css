@@ -1,0 +1,139 @@
+ul{
+    list-style-type: none;
+    list-style: none;
+    align-items: center;
+}
+
+div.dropdown-menu{
+    min-width: 3rem;
+    left: 25%;
+}
+
+.fas {
+    padding-right: 4px;
+}
+
+.nav-item{
+    padding-left: 10px;
+}
+
+.navbar-brand{
+  text-shadow: 2px 2px black;
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #dcddd4;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+.navbar .navbar-nav .nav-link:hover{
+  color: #fff;
+}
+
+.navbar .navbar-nav .nav-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: #2dc997;
+  color: transparent;
+  width: 0%;
+  content: '.';
+  height: 3px;
+  transition: all 0.5s;
+}
+
+.navbar .navbar-nav .nav-link:hover::after{
+  width: 100%;
+}
+
+.section-header .section-title {
+    font-size: 32px;
+    color: #111;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .section-header .section-description {
+    text-align: center;
+    padding-bottom: 40px;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+.general-area-home {
+    background: #fff;
+    background-size: cover;
+    padding: 15px 0 0 0;
+  }
+
+.general-area-home .box {
+    padding: 50px 20px;
+    margin-bottom: 50px;
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    height: 200px;
+    position: relative;
+    background: #fafafa;
+  }
+
+.general-area-home .icon {
+    position: absolute;
+    top: -36px;
+    left: calc(50% - 36px);
+    transition: 0.2s;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 72px;
+    height: 72px;
+    background: #2dc997;
+  }
+
+.general-area-home .icon a {
+    display: inline-block;
+  }
+
+.general-area-home .icon i {
+    color: #fff;
+    font-size: 24px;
+    line-height: 0;
+  }
+
+.general-area-home .box:hover .icon {
+    background: #fff;
+    border: 2px solid #2dc997;
+  }
+
+.general-area-home .box:hover .icon i {
+    color: #2dc997;
+  }
+
+.general-area-home .box:hover .icon a {
+    color: #2dc997;
+  }
+
+.general-area-home .title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+
+.general-area-home .title a {
+    color: #111;
+  }
+
+.general-area-home .description {
+    font-size: 14px;
+    line-height: 24px;
+  }

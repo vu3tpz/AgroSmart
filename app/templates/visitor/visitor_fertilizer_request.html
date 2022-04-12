@@ -1,0 +1,49 @@
+{% extends "visitor/visitor_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'officer/officer_active_crop.css' %}">
+ 
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <h1><u><b>Fertilizer Requested List</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Fertilizer</th>
+                    <th scope="col">Quantity(gram)</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in ferts %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{f.fertilizer}}</td>
+                    <td>{{f.quantity}}</td>
+                    <td>
+                    {% if f.approve is not True %}{% if f.reject is not True %}<font color='Orange'><b>UNDER PROCESS</b></font>{% endif %}{% endif %}
+                    {% if f.approve is True %}{% if f.reject is not True %}<font color='green'><b>APPROVED</b></font>{% endif %}{% endif %}
+                    {% if f.approve is not True %}{% if f.reject is True %}<font color='red'><b>REJECTED</b></font>{% endif %}{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

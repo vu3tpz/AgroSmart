@@ -1,0 +1,29 @@
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+select {
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+tr{
+    text-align: center;
+}
+
+.form-control{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-group{
+    font-weight: bold;
+}

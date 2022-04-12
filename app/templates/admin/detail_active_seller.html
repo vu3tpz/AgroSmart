@@ -1,0 +1,80 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+
+    <!-- Page content -->
+    <div class="content">
+        <h1>{{sellers.garden}}</h1>
+        <div class="row">
+            <div class="card" style="width: 18rem;">
+                <img src="{{sellers.logo.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title"><b><u>{{sellers.garden}}</u></b></h5>
+                <p class="card-text"><i>{{sellers.describe}}</i></p>
+                </div>
+            </div>
+            <div class="row1">
+                <table class="table">
+                    <tr>
+                        <th scope="row">Owner Name</th>
+                        <td>:</td>
+                        <td><i>{{sellers.get_name}}</i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Username</th>
+                        <td>:</td>
+                        <td><i>{{sellers.user}}</i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">District</th>
+                        <td>:</td>
+                        <td><i>{{sellers.district}}</i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Gender</th>
+                        <td>:</td>
+                        <td><i>{{sellers.gender}}</i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Gender</th>
+                        <td>:</td>
+                        <td><i>{{sellers.joindate}}</i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email id</th>
+                        <td>:</td>
+                        <td><i>{{sellers.email}}</i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Address</th>
+                        <td>:</td>
+                        <td><i>{{sellers.address|linebreaks }}</i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Reject</th>
+                        <td>:</td>
+                        <td><a class="btn btn-danger" href="{% url 'delete_seller_active' %}?seller_id={{sellers.pk}}">Reject</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .row{
+            padding-left: 20px;   
+        }
+        
+        .row1{
+            padding-left: 30px;
+        }
+
+        .table tr , .table th, .table td{
+            border: none;
+            padding-left: 30px;
+            text-align: left;
+            font-size: 24px;
+            padding-top: 30px;
+        }
+    </style>
+
+{% endblock %}

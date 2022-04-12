@@ -1,0 +1,45 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="btn-group float-right">
+            <a href="{% url 'admin_active_visitor' %}" class="btn btn-primary"><i class="fas fa-user-check"></i>Active</a>
+            <a href="{% url 'admin_approve_visitor' %}" class="btn btn-secondary"><i class="fas fa-user-cog"></i>Request</a>
+        </div>
+
+        <h1><u><b>Active Visitors</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Joining Date</th>
+                    <th scope="col">Delete Visitor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in visitors %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <td>{{v.get_name}}</td>
+                    <td>{{v.get_username}}</td>
+                    <td>{{v.email}}</td>
+                    <td>{{v.gender}}</td>
+                    <td>{{v.district}}</td>
+                    <td>{{v.joindate}}</td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_visitor_active' %}?visitor_id={{v.pk}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

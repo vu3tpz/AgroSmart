@@ -1,0 +1,58 @@
+{% extends "officer/officer_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'officer/officer_active_crop.css' %}">
+ 
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <h1><u><b>Seed Request</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Crop</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Approve</th>
+                    <th scope="col">Reject</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in seeds %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{s.name}}</td>
+                    <td>{{s.username}}</td>
+                    <td>{{s.email}}</td>
+                    <td>{{s.address}}</td>
+                    <td>{{s.district}}</td>
+                    <td>{{s.crop}}</td>
+                    <td>{{s.quantity}}</td>
+                    <td><a class="btn btn-success" href="{% url 'approve_seed_request' %}?seed_id={{s.pk}}">Approve</a></td>
+                    <td><a class="btn btn-danger" href="{% url 'reject_seed_request' %}?seed_id={{s.pk}}">Reject</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

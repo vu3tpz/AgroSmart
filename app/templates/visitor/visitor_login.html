@@ -1,0 +1,92 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>Agro Smart</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_login.css' %}">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-sm sticky-top bg-dark">
+            <div class="container-fluid"><a class="navbar-brand text-center" href="#" style="margin: 0px 0px;"><b>AGRO SMART</b></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div
+                    class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav text-light ml-auto">
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i>Home</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info-circle"></i>About</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href=#><i class="fas fa-paper-plane"></i>Contact</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_signup' %}"><i class="fas fa-user-plus"></i>Create Account</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'visitor_login' %}"><i class="fas fa-sign-in-alt"></i>Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="sidestyle">
+            <center><h1>Welcome</h1>
+            <p>You are 30 seconds away for helping the people to understand the best and suitable soils and crops for their location..!</p><br>
+            <p>You don't have account as Visitor.?</p>
+            <a class="btn btn-primary" href="{% url 'visitor_signup' %}">Register</a><br><hr>
+            <p>Forget Your Password.?</p>
+            <a class="btn btn-danger" href="#">Forget</a></center>
+        </div>
+    
+        <div class="container">
+
+            <form method="POST">
+                {% csrf_token %} 
+
+                <div class="form-group">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li>
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="btn-group float-right">
+                    <a href="{% url 'visitor_login' %}" class="btn btn-primary">Visitor</a>
+                    <a href="{% url 'officer_login' %}" class="btn btn-secondary">Officer</a>
+                    <a href="{% url 'admin_login' %}" class="btn btn-secondary">Admin</a>
+                </div>
+
+                <h1>VISITOR LOGIN</h1>
+
+                <hr>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8 mb-0">
+                        {{ form.username | as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8 mb-0">
+                        {{ form.password | as_crispy_field }}
+                    </div>
+                </div>
+
+                <hr>
+                
+                <div class="submit">
+                    <button type="submit" class="btn btn-primary" >Login</button>
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>

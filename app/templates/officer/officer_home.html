@@ -1,0 +1,148 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>Agro Smart</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'officer/officer_home.css' %}">
+
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark">
+        <div class="container-fluid"><a class="navbar-brand text-center" href="#" style="margin: 0px 0px;">AGRO SMART</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav text-light ml-auto">
+                    <li class="nav-item" role="presentation"><a class="user"><i class="fas fa-user-circle"></i>{{user.username}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <a href="{% url 'officer_home' %}"><i class="fas fa-home"></i>Home</a>
+        <a href="{% url 'officer_profile' %}"><i class="fas fa-address-card"></i>Profile</a>
+
+        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Manage Soil<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'officer_active_soil' %}"><i class="fas fa-seedling"></i>View Soil in location</a>
+            <a href="{% url 'officer_active_soil_detail' %}"><i class="fas fa-seedling"></i>View Soils Details</a>
+            <a href="{% url 'officer_approve_soil' %}"><i class="fas fa-cogs"></i>Verify soils location</a>
+        </div>
+
+        <a href="{% url 'officer_active_rainfall' %}"><i class="fas fa-cloud-showers-heavy"></i>View Rainfall</a>
+        
+        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Manage Crop<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'officer_active_crop' %}"><i class="fas fa-seedling"></i>View Crop</a>
+            <a href="{% url 'officer_approve_crop' %}"><i class="fas fa-cogs"></i>Verify Crop</a>
+        </div>
+
+        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Request for Seed<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'officer_seed_request' %}"><i class="fas fa-seedling"></i>View Request</a>
+            <a href="{% url 'officer_approve_seed_request' %}"><i class="fas fa-cogs"></i>Approved Request</a>
+            <a href="{% url 'officer_reject_seed_request' %}"><i class="fas fa-cogs"></i>Rejected Request</a>
+        </div>
+
+        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Request for Fertilizer<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'officer_fertilizer_request' %}"><i class="fas fa-seedling"></i>View Request</a>
+            <a href="{% url 'officer_approve_fertilizer_request' %}"><i class="fas fa-cogs"></i>Approved Request</a>
+            <a href="{% url 'officer_reject_fertilizer_request' %}"><i class="fas fa-cogs"></i>Rejected Request</a>
+        </div>
+
+        <div class="logout">
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+    </div>
+
+    <script>
+        //* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } 
+                else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
+
+    {% block content %}
+
+    <!-- Page content -->
+    <div class="content">
+        <h1><u><b>Home</b></u></h1>
+        <div class="welcome">
+            <p><b>Agriculture, with its allied sectors, is unquestionably the largest livelihood provider in India, more so in the vast rural areas. It product (GDP). Sustainable agriculture, in terms of food security, rural employment, and environmentally Sustainable technologies such as soil conservation, Sustainable natural resourse management and biodiversity protection, are essential for holistic rural development.</b></p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approve soil</b></U></h5>
+                        <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Soils...</b></p>
+                        <a href="{% url 'officer_approve_soil' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approval Crop</b></U></h5>
+                        <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Crops...</b></p>
+                        <a href="{% url 'officer_approve_crop' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approve Request for Seed</b></U></h5>
+                        <p class="card-text"><b>Visitors are waiting for approval for there Request for seed...</b></p>
+                        <a href="{% url 'officer_seed_request' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">
+                        <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approve Request for Fertilizer</b></U></h5>
+                        <p class="card-text"><b>Visitors are waiting for approval for there Request for Fertilizer...</b></p>
+                        <a href="{% url 'officer_fertilizer_request' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+    </body>
+</html>

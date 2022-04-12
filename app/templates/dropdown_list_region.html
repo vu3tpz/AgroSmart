@@ -1,0 +1,4 @@
+<option value="">---Select Region---</option>
+{% for region in regions %}
+<option value="{{ region.pk }}">{{ region.name }}</option>
+{% endfor %}
