@@ -55,7 +55,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
     margin: 0;
     padding: 0;
     width: 25%;
-    background-color:#f1f1f1;
+    background-color:#fff;
     position: fixed;
     height: 93%;
     overflow: auto;
@@ -64,9 +64,9 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 .sidestyle h1{
     font-family: 'Times New Roman', Times, serif;
     align-items: center;
-    padding-top: 150px;
+    padding-top: 20px;
     font-style: bold;
-
+    padding-bottom: 10px;
 }
 
 .sidestyle p{
@@ -89,7 +89,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
     display: inline-block;
     font-weight: bold;
     border: none;
-    background: #f1f1f1;
+    background: #fff;
 }
 
 div.dropdown-menu{
@@ -132,7 +132,7 @@ ul{
 }
 
 .navbar .navbar-nav .nav-link {
-    color: #dcddd4;
+    color: #fff;
     font-size: 15px;
     font-family: "Poppins", sans-serif;
     position: relative;
