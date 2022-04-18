@@ -1,0 +1,70 @@
+{% extends "seller/seller_home.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'seller/add_product.css' %}">
+
+    <!-- Page content -->
+    <div class="content">
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div class="container">
+                <h1><u>Add New Product</u></h1>
+                
+                <hr>
+    
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        {{ form.product_name | as_crispy_field }}
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        {{ form.describe | as_crispy_field }}
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.image_1 | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.image_2 | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.image_3 | as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.total_quantity | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.unit | as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.price | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.price_per_quantity | as_crispy_field }}
+                    </div>
+                </div>
+    
+                <hr>
+                
+                <div class="submit">
+                    <button type="submit" class="btn btn-primary" >Add</button>
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}

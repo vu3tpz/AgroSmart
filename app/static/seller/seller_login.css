@@ -25,10 +25,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
     font-weight: bold;
 }
 
-textarea{
-    height: 150px;
-}
-
 .submit button{
     margin: 8px 0;
     border: none;
@@ -70,7 +66,7 @@ textarea{
     align-items: center;
     padding-top: 20px;
     font-style: bold;
-
+    padding-bottom: 10px;
 }
 
 .sidestyle p{
@@ -93,7 +89,7 @@ textarea{
     display: inline-block;
     font-weight: bold;
     border: none;
-    background: #f1f1f1;
+    background: #fff;
 }
 
 div.dropdown-menu{
@@ -121,8 +117,22 @@ ul{
     align-items: center;
 }
 
+.form-group{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.form-group label,.form-group input{ 
+    float:left; 
+    display:inline;   
+}
+
+.form-group label { 
+    line-height:--px; 
+}
+
 .navbar .navbar-nav .nav-link {
-    color: #dcddd4;
+    color: #fff;
     font-size: 15px;
     font-family: "Poppins", sans-serif;
     position: relative;

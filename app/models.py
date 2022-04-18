@@ -1,5 +1,3 @@
-from distutils.command.upload import upload
-from pydoc import describe
 from djongo import models
 from django.contrib.auth.models import User
 
@@ -192,3 +190,25 @@ class Seller(models.Model):
     @property
     def get_username(self):
         return self.user.username
+
+class Product(models.Model):
+    product_name = models.CharField(max_length=30)
+    describe = models.CharField(max_length=1000)
+    joindate = models.DateField(auto_now_add=True)
+    image_1 = models.ImageField(upload_to='product image/')
+    image_2 = models.ImageField(upload_to='product image/')
+    image_3 = models.ImageField(upload_to='product image/')
+    garden = models.CharField(max_length=50)
+    district = models.CharField(max_length=30)
+    total_quantity = models.IntegerField(5)
+    unit = models.CharField(max_length=20)
+    price = models.IntegerField(5)
+    price_per_quantity = models.CharField(max_length=20)
+    status = models.BooleanField(default=False)
+
+    def __self__(self):
+        return self.id
+
+    @property
+    def get_price(self):
+        return self.price+" "+self.pick_quantity

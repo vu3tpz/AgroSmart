@@ -10,7 +10,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_login.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'seller/seller_login.css' %}">
     </head>
 
     <body>
@@ -31,10 +31,10 @@
 
         <div class="sidestyle">
             <center>
-                <img src="{% static 'image/login1.png' %}" width="250" height="300">
+                <img src="{% static 'image/login2.png' %}" width="350" height="300">
                 <h1>Welcome Back!</h1>
-                <p>You don't have account as Visitor.?</p>
-                <a class="btn btn-primary" href="{% url 'visitor_signup' %}">Register</a><br><hr>
+                <p>You don't have account as Seller.?</p>
+                <a class="btn btn-primary" href="{% url 'seller_signup' %}">Register</a><br><hr>
                 <p>Forget Your Password.?</p>
                 <a class="btn btn-danger" href="#">Forget</a>
             </center>
@@ -60,13 +60,13 @@
                 </div>
                 
                 <div class="btn-group float-right">
-                    <a href="{% url 'visitor_login' %}" class="btn btn-primary">Visitor</a>
-                    <a href="{% url 'seller_login' %}" class="btn btn-secondary">Seller</a>
+                    <a href="{% url 'visitor_login' %}" class="btn btn-secondary">Visitor</a>
+                    <a href="{% url 'seller_login' %}" class="btn btn-primary">Seller</a>
                     <a href="{% url 'officer_login' %}" class="btn btn-secondary">Officer</a>
                     <a href="{% url 'admin_login' %}" class="btn btn-secondary">Admin</a>
                 </div>
 
-                <h1>VISITOR LOGIN</h1>
+                <h1>SELLER LOGIN</h1>
 
                 <hr>
 

@@ -1,0 +1,45 @@
+{% extends "seller/seller_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'seller/product.css' %}">
+
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="btn-group float-right">
+            <a href="{% url 'add_product' %}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>Add Product</a>
+        </div>
+
+        <h1><u><b>Product</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Joining Date</th>
+                    <th scope="col">Delete Admin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- {% for a in admins %} -->
+                <tr>
+                    <!-- <th>{{ forloop.counter }}</th> -->
+                    <!-- <td>{{a.get_name}}</td> -->
+                    <!-- <td>{{a.get_username}}</td> -->
+                    <!-- <td>{{a.email}}</td> -->
+                    <!-- <td>{{a.gender}}</td> -->
+                    <!-- <td>{{a.district}}</td> -->
+                    <!-- <td>{{a.joindate}}</td> -->
+                </tr>
+                <!-- {% endfor %} -->
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

@@ -36,6 +36,8 @@ def is_visitor(user):
     return user.groups.filter(name='VISITOR').exists()
 def is_officer(user):
     return user.groups.filter(name='OFFICER').exists()
+def is_seller(user):
+    return user.groups.filter(name='SELLER').exists()
 
 #<-----LogOut For All----->#
 def logout_view(request):
@@ -1079,3 +1081,68 @@ def seller_signup(request):
         form1=SellerUserForm()
         form2=SellerExtraForm()
     return render(request, 'seller/seller_signup.html',{'form1':form1,'form2':form2})
+
+#<-----Login For Seller----->#
+def seller_login(request):
+    if request.method == 'POST':
+        form = SellerLoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.groups.filter(name='SELLER'):
+                    if Seller.objects.all().filter(user_id=user.id,status=True):
+                        login(request,user)
+                        return redirect('seller_home')
+                    else:
+                       messages.success(request, 'Your Request is in process, please wait for Approval..') 
+                else:
+                    messages.success(request, 'Your account is not found in Seller..')
+            else:
+                messages.success(request, 'Your Username and Password is Wrong..')
+    else:
+         form = VisitorLoginForm()           
+    return render(request, 'seller/seller_login.html',{'form':form})
+
+#<-----Home Page for Seller----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def seller_home(request):
+    return render(request, 'seller/seller_home.html')
+
+#<-----Seller product page----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def product(request):
+    return render(request, 'seller/product.html')
+
+#<-----Seller add new product page----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def add_product(request):
+    if request.method=='POST':
+        form=ProductAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            
+            product_name = request.POST.get('product_name')
+            describe = request.POST.get('describe')
+            image_1 = request.FILES.get('image_1')
+            image_2 = request.FILES.get('image_2')
+            image_3 = request.FILES.get('image_3')
+            district = str(request.user.seller.district)
+            garden = request.user.seller.garden
+            total_quantity = request.POST.get('total_quantity')
+            unit = request.POST.get('unit')
+            price = request.POST.get('price')
+            price_per_quantity = request.POST.get('price_per_quantity')
+
+            req=Product.objects.create(product_name=product_name, describe=describe, image_1=image_1, image_2=image_2, image_3=image_3, district=district, garden=garden, total_quantity=total_quantity, unit=unit, price=price, price_per_quantity=price_per_quantity)
+            req.save()
+            
+            messages.success(request, 'Your Product save successfully..')
+
+            return HttpResponseRedirect('seller_home')
+    else:
+        form=ProductAddForm()
+    return render(request, 'seller/add_product.html',{'form':form})

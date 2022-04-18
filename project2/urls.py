@@ -160,6 +160,10 @@ urlpatterns = [
     #<-----Sellers URLs----->
 
     path('seller_signup',seller_signup,name='seller_signup'),
+    path('seller_login',seller_login,name='seller_login'),
+    path('seller_home',seller_home,name='seller_home'),
+    path('product',product,name='product'),
+    path('add_product',add_product,name='add_product'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

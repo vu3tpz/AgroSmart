@@ -116,6 +116,11 @@ class VisitorLoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Your Username'}), required=True)
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Enter Your Password'}), required=True)
 
+#<-----Seller Login Form----->#
+class SellerLoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Your Username'}), required=True)
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Enter Your Password'}), required=True)
+
 #<-----Admin Login Form----->#
 class AdminLoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Your Username'}), required=True)
@@ -330,3 +335,37 @@ class SellerExtraForm(forms.ModelForm):
     class Meta:
         model=Seller
         fields=['garden','logo','describe','address','email', 'gender', 'district','security_question','answer']
+
+QUANTITY=(
+    ("", "---Select Qunatity---"),
+    ("1 Kilogram", "1 Kilogram"),
+    ("500 Gram", "500 Gram"),
+    ("250 Gram", "250 Gram"),
+    ("100 Gram", "100 Gram"),
+    ("50 Gram", "50 Gram"),
+    ("25 Gram", "25 Gram"),
+    ("1 Gram", "1 Gram"),
+    ("1 Pack", "1 Pack"),
+)
+
+UNIT=(
+    ("","---Select Unit---"),
+    ("Kilograms","Kilograms"),
+    ("Grams","Grams"),
+    ("Packs","Packs")
+)
+
+class ProductAddForm(forms.ModelForm):
+    product_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Product Name'}), required=True)
+    describe = forms.CharField(widget=forms.Textarea(attrs={'class':'forms-control','placeholder':'Describe about product..'}), required=True)
+    image_1 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}), required=True)
+    image_2 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}), required=True)
+    image_3 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}))
+    total_quantity = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Total Quantity of product'}), required=True)
+    unit = forms.ChoiceField(choices=UNIT,widget=forms.Select(attrs={'class':'form-control'}), required=True)
+    price = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Price of Product'}), required=True)
+    price_per_quantity = forms.ChoiceField(choices=QUANTITY,widget=forms.Select(attrs={'class':'form-control'}), required=True)
+
+    class Meta:
+        model=Product
+        fields=['product_name','describe','image_1','image_2','image_3','total_quantity' ,'unit','price','price_per_quantity']
