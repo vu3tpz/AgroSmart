@@ -103,13 +103,11 @@ class VisitorUserForm(forms.ModelForm):
 class VisitorExtraForm(forms.ModelForm):
     email = forms.CharField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Enter Email ID'}), required=True)
     gender = forms.ChoiceField(choices=GENDER,widget=forms.Select(attrs={'class':'form-control'}), required=True)
-    security_question = forms.ChoiceField(choices=SECURITY,widget=forms.Select(attrs={'class':'form-control'}), required=True)
-    answer = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Answer for Security Question'}), required=True)
     district = forms.ModelChoiceField(queryset=District.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select District---", required=True)
 
     class Meta:
         model=Visitor
-        fields=['email', 'gender', 'district','security_question','answer']
+        fields=['email', 'gender', 'district']
 
 #<-----Visistor Login Form----->#
 class VisitorLoginForm(forms.Form):
@@ -165,13 +163,11 @@ class OfficerUserForm(forms.ModelForm):
 class OfficerExtraForm(forms.ModelForm):
     email = forms.CharField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Enter Email ID'}), required=True)
     gender = forms.ChoiceField(choices=GENDER,widget=forms.Select(attrs={'class':'form-control'}), required=True)
-    security_question = forms.ChoiceField(choices=SECURITY,widget=forms.Select(attrs={'class':'form-control'}), required=True)
-    answer = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Answer for Security Question'}), required=True)
     district = forms.ModelChoiceField(queryset=District.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select District---", required=True)
 
     class Meta:
         model=Officer
-        fields=['email', 'gender', 'district','security_question','answer']
+        fields=['email', 'gender', 'district']
 
 #<-----Officer Login Form----->#
 class OfficerLoginForm(forms.Form):
@@ -328,13 +324,11 @@ class SellerExtraForm(forms.ModelForm):
     address = forms.CharField(widget=forms.Textarea(attrs={'class':'forms-control','placeholder':'Address of your Garden..'}), required=True)
     email = forms.CharField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Enter Email ID'}), required=True)
     gender = forms.ChoiceField(choices=GENDER,widget=forms.Select(attrs={'class':'form-control'}), required=True)
-    security_question = forms.ChoiceField(choices=SECURITY,widget=forms.Select(attrs={'class':'form-control'}), required=True)
-    answer = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Answer for Security Question'}), required=True)
     district = forms.ModelChoiceField(queryset=District.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select District---", required=True)
 
     class Meta:
         model=Seller
-        fields=['garden','logo','describe','address','email', 'gender', 'district','security_question','answer']
+        fields=['garden','logo','describe','address','email', 'gender', 'district']
 
 QUANTITY=(
     ("", "---Select Qunatity---"),
@@ -348,24 +342,23 @@ QUANTITY=(
     ("1 Pack", "1 Pack"),
 )
 
-UNIT=(
-    ("","---Select Unit---"),
-    ("Kilograms","Kilograms"),
-    ("Grams","Grams"),
-    ("Packs","Packs")
-)
-
 class ProductAddForm(forms.ModelForm):
     product_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Product Name'}), required=True)
     describe = forms.CharField(widget=forms.Textarea(attrs={'class':'forms-control','placeholder':'Describe about product..'}), required=True)
     image_1 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}), required=True)
     image_2 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}), required=True)
     image_3 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}))
-    total_quantity = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Total Quantity of product'}), required=True)
-    unit = forms.ChoiceField(choices=UNIT,widget=forms.Select(attrs={'class':'form-control'}), required=True)
+    image_4 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}))
     price = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Price of Product'}), required=True)
     price_per_quantity = forms.ChoiceField(choices=QUANTITY,widget=forms.Select(attrs={'class':'form-control'}), required=True)
 
     class Meta:
         model=Product
-        fields=['product_name','describe','image_1','image_2','image_3','total_quantity' ,'unit','price','price_per_quantity']
+        fields=['product_name','describe','image_1','image_2','image_3','image_4','price','price_per_quantity']
+
+class EditPriceForm(forms.ModelForm):
+    price = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control'}), required=True)
+
+    class Meta:
+        model=Product
+        fields=['price']

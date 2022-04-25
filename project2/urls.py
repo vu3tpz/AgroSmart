@@ -62,32 +62,6 @@ urlpatterns = [
     path('admin_active_officer', admin_active_officer,name='admin_active_officer'),
     path('delete_officer_active', delete_officer_active, name='delete_officer_active'),
 
-    path('admin_add_soil', admin_add_soil, name='admin_add_soil'),
-    path('admin_add_soil_detail', admin_add_soil_detail, name='admin_add_soil_detail'),
-    path('admin_add_rainfall', admin_add_rainfall, name='admin_add_rainfall'),
-    path('admin_add_crop', admin_add_crop, name='admin_add_crop'),
-
-    path('admin_approve_soil', admin_approve_soil,name='admin_approve_soil'),
-    path('approve_soil_request', approve_soil_request, name='approve_soil_request'),
-    path('delete_soil_request', delete_soil_request, name='delete_soil_request'),
-
-    path('admin_active_soil', admin_active_soil,name='admin_active_soil'),
-    path('delete_soil_location_active', delete_soil_location_active, name='delete_soil_location_active'),
-
-    path('admin_active_soil_detail', admin_active_soil_detail,name='admin_active_soil_detail'),
-    path('delete_soil_detail_active', delete_soil_detail_active, name='delete_soil_detail_active'),
-    path('ajax/load-regions/', load_regions, name="ajax_load_regions"),
-
-    path('admin_active_rainfall', admin_active_rainfall,name='admin_active_rainfall'),
-    path('delete_rainfall_active', delete_rainfall_active, name='delete_rainfall_active'),
-
-    path('admin_approve_crop', admin_approve_crop,name='admin_approve_crop'),
-    path('approve_crop_request', approve_crop_request, name='approve_crop_request'),
-    path('delete_crop_request', delete_crop_request, name='delete_crop_request'),
-
-    path('admin_active_crop', admin_active_crop,name='admin_active_crop'),
-    path('delete_crop_active', delete_crop_active, name='delete_crop_active'),
-
     #<-----Visitor URLs----->
 
     path('visitor_signup',visitor_signup,name='visitor_signup'),
@@ -163,6 +137,7 @@ urlpatterns = [
     path('seller_login',seller_login,name='seller_login'),
     path('seller_home',seller_home,name='seller_home'),
     path('product',product,name='product'),
+    path('<int:id>/detail_product_seller',detail_product_seller,name='detail_product_seller'),
     path('add_product',add_product,name='add_product'),
 ]
 

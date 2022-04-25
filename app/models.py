@@ -35,8 +35,6 @@ class Visitor(models.Model):
     email = models.EmailField(unique=True)
     gender = models.CharField(max_length=20)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-    security_question = models.CharField(max_length=200)
-    answer = models.CharField(max_length=100)
     status = models.BooleanField(default=False)
     def __str__(self):
         return self.user.first_name
@@ -74,8 +72,6 @@ class Officer(models.Model):
     email = models.EmailField(unique=True)
     gender = models.CharField(max_length=20)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-    status = models.BooleanField(default=False)
-    security_question = models.CharField(max_length=200)
     answer = models.CharField(max_length=100)
     def __str__(self):
         return self.user.first_name
@@ -175,8 +171,6 @@ class Seller(models.Model):
     address = models.CharField(max_length=500)
     gender = models.CharField(max_length=20)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-    security_question = models.CharField(max_length=200)
-    answer = models.CharField(max_length=100)
     status = models.BooleanField(default=False)
     
     def __str__(self):
@@ -198,13 +192,13 @@ class Product(models.Model):
     image_1 = models.ImageField(upload_to='product image/')
     image_2 = models.ImageField(upload_to='product image/')
     image_3 = models.ImageField(upload_to='product image/')
+    image_4 = models.ImageField(upload_to='product image/')
     garden = models.CharField(max_length=50)
     district = models.CharField(max_length=30)
-    total_quantity = models.IntegerField(5)
-    unit = models.CharField(max_length=20)
     price = models.IntegerField(5)
     price_per_quantity = models.CharField(max_length=20)
     status = models.BooleanField(default=False)
+    stock = models.BooleanField(default=True)
 
     def __self__(self):
         return self.id

@@ -269,174 +269,6 @@ def delete_officer_active(request):
     officer.delete()
     return redirect(reverse('admin_active_officer'))
 
-#<-----Admin Approvall for Soils----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_approve_soil(request):
-    soils = SoilLocationDetail.objects.all().filter(status=False)
-    return render(request, 'admin/admin_approve_soil.html',{'soils':soils})
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def approve_soil_request(request):
-    soil=get_object_or_404(SoilLocationDetail, pk=request.GET.get('soil_id'))
-    soil.status=True
-    soil.save()
-    return redirect(reverse('admin_approve_soil'))
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def delete_soil_request(request):
-    soil=get_object_or_404(SoilLocationDetail, pk=request.GET.get('soil_id'))
-    soil.delete()
-    return redirect(reverse('admin_approve_soil'))
-
-#<-----Admin Approvall for Crop----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_approve_crop(request):
-    crops = CropDetail.objects.all().filter(status=False)
-    return render(request, 'admin/admin_approve_crop.html',{'crops':crops})
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def approve_crop_request(request):
-    crop=get_object_or_404(CropDetail, pk=request.GET.get('crop_id'))
-    crop.status=True
-    crop.save()
-    return redirect(reverse('admin_approve_crop'))
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def delete_crop_request(request):
-    crop=get_object_or_404(CropDetail, pk=request.GET.get('crop_id'))
-    crop.delete()
-    return redirect(reverse('admin_approve_crop'))
-
-#<-----Active Soils View for Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_active_soil(request):
-    soils = SoilLocationDetail.objects.all().filter(status=True)
-    return render(request, 'admin/admin_active_soil.html',{'soils':soils})
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def delete_soil_location_active(request):
-    soil=get_object_or_404(SoilLocationDetail, pk=request.GET.get('soil_id'))
-    soil.delete()
-    return redirect(reverse('admin_active_soil'))
-
-#<-----Add soil By Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_add_soil(request):
-    if request.method=='POST':
-        form=SoilAddForm(request.POST)
-        if form.is_valid():
-            user=form.save()
-            user.status=True
-            user.save()
-
-            return HttpResponseRedirect('admin_active_soil')
-    else:
-        form=SoilAddForm()
-    return render(request, 'admin/admin_add_soil.html',{'form':form})
-
-def load_regions(request):
-    district_id = request.GET.get('district_id')
-    regions = Region.objects.filter(district_id=district_id).all()
-    return render(request, 'dropdown_list_region.html', {'regions':regions})
-    #return JsonResponse(list(regions.values('id','name')), safe=False)
-
-#<-----Add soil Detail By Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_add_soil_detail(request):
-    if request.method=='POST':
-        form=SoilDetailAddForm(request.POST)
-        if form.is_valid():
-            user=form.save()
-            user.save()
-
-            return HttpResponseRedirect('admin_active_soil_detail')
-    else:
-        form=SoilDetailAddForm()
-    return render(request, 'admin/admin_add_soil_detail.html',{'form':form})
-
-#<-----Active Detail of Soil View for Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_active_soil_detail(request):
-    soils = SoilDetail.objects.all()
-    return render(request, 'admin/admin_active_soil_detail.html',{'soils':soils})
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def delete_soil_detail_active(request):
-    soil=get_object_or_404(SoilDetail, pk=request.GET.get('soil_id'))
-    soil.delete()
-    return redirect(reverse('admin_active_soil_detail'))
-
-#<-----Add Rainfall Detail By Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_add_rainfall(request):
-    if request.method=='POST':
-        form=RainfallDetailAddForm(request.POST)
-        if form.is_valid():
-            user=form.save()
-            user.save()
-
-            return HttpResponseRedirect('admin_active_rainfall')
-    else:
-        form=RainfallDetailAddForm()
-    return render(request, 'admin/admin_add_rainfall.html',{'form':form})
-
-#<-----Active Detail of Rainfall View for Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_active_rainfall(request):
-    rainfalls = RainfallDetail.objects.all()
-    return render(request, 'admin/admin_active_rainfall.html',{'rainfalls':rainfalls})
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def delete_rainfall_active(request):
-    rainfall=get_object_or_404(RainfallDetail, pk=request.GET.get('rainfall_id'))
-    rainfall.delete()
-    return redirect(reverse('admin_active_rainfall'))
-
-#<-----Active Crop for Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_active_crop(request):
-    crops = CropDetail.objects.all().filter(status=True)
-    return render(request, 'admin/admin_active_crop.html',{'crops':crops})
-
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def delete_crop_active(request):
-    crop=get_object_or_404(CropDetail, pk=request.GET.get('crop_id'))
-    crop.delete()
-    return redirect(reverse('admin_active_crop'))
-
-#<-----Add Crop Detail By Admin----->#
-@login_required(login_url='admin_login')
-@user_passes_test(is_admin)
-def admin_add_crop(request):
-    if request.method=='POST':
-        form=CropAddForm(request.POST)
-        if form.is_valid():
-            user=form.save()
-            user.status=True
-            user.save()
-
-            return HttpResponseRedirect('admin_active_crop')
-    else:
-        form=CropAddForm()
-    return render(request, 'admin/admin_add_crop.html',{'form':form})
-
 #<---------------------------------------------->#
 #<---------------Visitor Functions-------------->#
 #<---------------------------------------------->#
@@ -1115,7 +947,27 @@ def seller_home(request):
 @login_required(login_url='seller_login')
 @user_passes_test(is_seller)
 def product(request):
-    return render(request, 'seller/product.html')
+    products = Product.objects.all().filter(garden=request.user.seller.garden)
+    return render(request, 'seller/product.html',{'products':products})
+
+#<-----Detail view of product----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def detail_product_seller(request, id):
+    products = Product.objects.all().get(id=id)
+    if request.method=='POST':
+        form=EditPriceForm(request.POST)
+        if form.is_valid():
+            obj = Product.objects.all().get(id=id)
+            obj.price = request.POST.get('price')
+            obj.save()
+
+            messages.success(request, 'Your Price update successfully..')
+
+            return HttpResponseRedirect('detail_product_seller')
+    else:
+        form=EditPriceForm()
+    return render(request, 'seller/detail_product_seller.html',{'products':products,'form':form})
 
 #<-----Seller add new product page----->#
 @login_required(login_url='seller_login')
