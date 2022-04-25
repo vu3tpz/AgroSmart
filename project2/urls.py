@@ -139,6 +139,9 @@ urlpatterns = [
     path('product',product,name='product'),
     path('<int:id>/detail_product_seller',detail_product_seller,name='detail_product_seller'),
     path('add_product',add_product,name='add_product'),
+    path('outofstock',outofstock,name='outofstock'),
+    path('instock',instock,name='instock'),
+    path('delete_product_seller',delete_product_seller,name='delete_product_seller'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

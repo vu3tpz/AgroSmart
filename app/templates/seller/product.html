@@ -17,7 +17,7 @@
                 <tr>
                     <th scope="col">SL NO.</th>
                     <th scope="col">Product</th>
-                    <th scope="col">Total Qunatity</th>
+                    <th scope="col">Stock</th>
                     <th scope="col">Price</th>
                     <th scope="col">Add On</th>
                     <th scope="col">Know More</th>
@@ -28,7 +28,7 @@
                 <tr>
                     <th>{{ forloop.counter }}</th>
                     <td>{{p.product_name}}</td>
-                    <td>{{p.total_quantity}} {{p.unit}}</td>
+                    <td>{% if p.stock is not True %}<font color='red'><b>Out of stock</b></font>{% endif %}{% if p.stock is True %}<font color='green'><b>Stock avaliable</b></font>{% endif %}</td>
                     <td>{{p.price}} for {{p.price_per_quantity}}</td>
                     <td>{{p.joindate}}</td>
                     <td><a class="btn btn-success" href="{% url 'detail_product_seller'  p.id %}">View</a></td>

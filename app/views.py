@@ -982,19 +982,42 @@ def add_product(request):
             image_1 = request.FILES.get('image_1')
             image_2 = request.FILES.get('image_2')
             image_3 = request.FILES.get('image_3')
+            image_4 = request.FILES.get('image_4')
             district = str(request.user.seller.district)
             garden = request.user.seller.garden
-            total_quantity = request.POST.get('total_quantity')
-            unit = request.POST.get('unit')
             price = request.POST.get('price')
             price_per_quantity = request.POST.get('price_per_quantity')
 
-            req=Product.objects.create(product_name=product_name, describe=describe, image_1=image_1, image_2=image_2, image_3=image_3, district=district, garden=garden, total_quantity=total_quantity, unit=unit, price=price, price_per_quantity=price_per_quantity)
+            req=Product.objects.create(product_name=product_name, describe=describe, image_1=image_1, image_2=image_2, image_3=image_3, image_4=image_4, district=district, garden=garden, price=price, price_per_quantity=price_per_quantity)
             req.save()
-            
-            messages.success(request, 'Your Product save successfully..')
 
             return HttpResponseRedirect('seller_home')
     else:
         form=ProductAddForm()
     return render(request, 'seller/add_product.html',{'form':form})
+
+#<-----Make out of stock----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def outofstock(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.stock=False
+    product.save()
+    return redirect(reverse('product'))
+
+#<-----Make out of stock----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def instock(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.stock=True
+    product.save()
+    return redirect(reverse('product'))
+
+#<-----Delete product----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def delete_product_seller(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.delete()
+    return redirect(reverse('product'))
