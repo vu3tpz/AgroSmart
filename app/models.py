@@ -1,3 +1,4 @@
+from unicodedata import category
 from djongo import models
 from django.contrib.auth.models import User
 
@@ -194,15 +195,13 @@ class Product(models.Model):
     image_3 = models.ImageField(upload_to='product image/')
     image_4 = models.ImageField(upload_to='product image/')
     garden = models.CharField(max_length=50)
+    category = models.CharField(max_length=30)
     district = models.CharField(max_length=30)
     price = models.IntegerField(5)
     price_per_quantity = models.CharField(max_length=20)
     status = models.BooleanField(default=False)
     stock = models.BooleanField(default=True)
+    activity = models.BooleanField(default=True)
 
     def __self__(self):
         return self.id
-
-    @property
-    def get_price(self):
-        return self.price+" "+self.pick_quantity

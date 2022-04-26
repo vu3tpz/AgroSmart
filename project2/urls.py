@@ -62,6 +62,17 @@ urlpatterns = [
     path('admin_active_officer', admin_active_officer,name='admin_active_officer'),
     path('delete_officer_active', delete_officer_active, name='delete_officer_active'),
 
+    path('admin_product',admin_product,name='admin_product'),
+    path('<int:id>/detail_product_admin',detail_product_admin,name='detail_product_admin'),
+    path('<int:id>/detail_request_product_admin',detail_request_product_admin,name='detail_request_product_admin'),
+    path('admin_request_product',admin_request_product,name='admin_request_product'),
+    path('product_approve',product_approve,name='product_approve'),
+    path('product_delete',product_delete,name='product_delete'),
+
+    path('inactive',inactive,name='inactive'),
+    path('active',active,name='active'),
+    path('approve_product_delete',approve_product_delete,name='approve_product_delete'),
+
     #<-----Visitor URLs----->
 
     path('visitor_signup',visitor_signup,name='visitor_signup'),

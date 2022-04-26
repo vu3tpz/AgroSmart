@@ -1,0 +1,45 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/admin_product.css' %}">
+
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="btn-group float-right">
+            <a href="{% url 'admin_product' %}" class="btn btn-primary"><i class="fas fa-user-check"></i>Active</a>
+            <a href="{% url 'admin_request_product' %}" class="btn btn-secondary"><i class="fas fa-user-cog"></i>Request</a>
+        </div>
+
+        <h1><u><b>Active Product</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Garden Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Add On</th>
+                    <th scope="col">Know More</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in products %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <td>{{p.product_name}}</td>
+                    <td>{{p.garden}}</td>
+                    <td>{% if p.activity is not True %}<font color='red'><b>Inactive</b></font>{% endif %}{% if p.activity is True %}<font color='green'><b>Active</b></font>{% endif %}</td>
+                    <td>{{p.price}} for {{p.price_per_quantity}}</td>
+                    <td>{{p.joindate}}</td>
+                    <td><a class="btn btn-success" href="{% url 'detail_product_admin'  p.id %}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

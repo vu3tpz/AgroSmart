@@ -1,3 +1,4 @@
+from sre_constants import CATEGORY
 from urllib import request
 from attr import attrs
 from django import forms
@@ -342,6 +343,14 @@ QUANTITY=(
     ("1 Pack", "1 Pack"),
 )
 
+CATEGORY=(
+    ("","---Select Category---"),
+    ("Vegitable","Vegitable"),
+    ("Fruit","Fruit"),
+    ("Seed","Seed"),
+    ("Homemade Fertilizer","Homemade Fertilizer"),
+)
+
 class ProductAddForm(forms.ModelForm):
     product_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Product Name'}), required=True)
     describe = forms.CharField(widget=forms.Textarea(attrs={'class':'forms-control','placeholder':'Describe about product..'}), required=True)
@@ -349,12 +358,13 @@ class ProductAddForm(forms.ModelForm):
     image_2 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}), required=True)
     image_3 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}))
     image_4 = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control'}))
+    category = forms.ChoiceField(choices=CATEGORY,widget=forms.Select(attrs={'class':'form-control'}), required=True)
     price = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Price of Product'}), required=True)
     price_per_quantity = forms.ChoiceField(choices=QUANTITY,widget=forms.Select(attrs={'class':'form-control'}), required=True)
 
     class Meta:
         model=Product
-        fields=['product_name','describe','image_1','image_2','image_3','image_4','price','price_per_quantity']
+        fields=['product_name','describe','image_1','image_2','image_3','image_4','price','price_per_quantity','category']
 
 class EditPriceForm(forms.ModelForm):
     price = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control'}), required=True)

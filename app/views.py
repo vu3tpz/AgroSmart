@@ -269,6 +269,77 @@ def delete_officer_active(request):
     officer.delete()
     return redirect(reverse('admin_active_officer'))
 
+#<-----Admin active product page----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def admin_product(request):
+    products = Product.objects.all().filter(status=True)
+    return render(request, 'admin/admin_product.html',{'products':products})
+
+#<-----admin Detail view of product----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def detail_product_admin(request, id):
+    products = Product.objects.all().get(id=id)
+    return render(request, 'admin/detail_product_admin.html',{'products':products})
+
+#<-----Admin active product page----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def admin_request_product(request):
+    products = Product.objects.all().filter(status=False)
+    return render(request, 'admin/admin_request_product.html',{'products':products})
+
+#<-----admin Detail view of product----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def detail_request_product_admin(request, id):
+    products = Product.objects.all().get(id=id)
+    return render(request, 'admin/detail_request_product_admin.html',{'products':products})
+
+#<-----Admin approve product----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def product_approve(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.status=True
+    product.save()
+    return redirect(reverse('admin_request_product'))
+
+#<-----admin delete product----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def product_delete(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.delete()
+    return redirect(reverse('admin_request_product'))
+
+#<-----admin inactive product----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def inactive(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.activity=False
+    product.save()
+    return redirect(reverse('admin_product'))
+
+#<-----admin active product----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def active(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.activity=True
+    product.save()
+    return redirect(reverse('admin_product'))
+
+#<-----admin delete approved product----->#
+@login_required(login_url='admin_login')
+@user_passes_test(is_admin)
+def approve_product_delete(request):
+    product=get_object_or_404(Product, pk=request.GET.get('product_id'))
+    product.delete()
+    return redirect(reverse('admin_product'))
+
 #<---------------------------------------------->#
 #<---------------Visitor Functions-------------->#
 #<---------------------------------------------->#
@@ -962,8 +1033,6 @@ def detail_product_seller(request, id):
             obj.price = request.POST.get('price')
             obj.save()
 
-            messages.success(request, 'Your Price update successfully..')
-
             return HttpResponseRedirect('detail_product_seller')
     else:
         form=EditPriceForm()
@@ -985,10 +1054,11 @@ def add_product(request):
             image_4 = request.FILES.get('image_4')
             district = str(request.user.seller.district)
             garden = request.user.seller.garden
+            category=request.POST.get('category')
             price = request.POST.get('price')
             price_per_quantity = request.POST.get('price_per_quantity')
 
-            req=Product.objects.create(product_name=product_name, describe=describe, image_1=image_1, image_2=image_2, image_3=image_3, image_4=image_4, district=district, garden=garden, price=price, price_per_quantity=price_per_quantity)
+            req=Product.objects.create(product_name=product_name, describe=describe, image_1=image_1, image_2=image_2, image_3=image_3, image_4=image_4, district=district, garden=garden, category=category, price=price, price_per_quantity=price_per_quantity)
             req.save()
 
             return HttpResponseRedirect('seller_home')

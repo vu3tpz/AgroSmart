@@ -9,6 +9,55 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_market_home.css' %}">
+
+        <style>
+            .hero__item {
+	            height: 431px;
+	            display: flex;
+	            align-items: center;
+	            padding-left: 75px;
+            }
+            .hero__text span {
+	            font-size: 14px;
+	            text-transform: uppercase;
+	            font-weight: 700;
+	            letter-spacing: 4px;
+	            color: #7fad39;
+                font-family: "Cairo", sans-serif;
+            }
+            .hero__text h2 {
+	            font-size: 46px;
+	            color: #000000;
+	            line-height: 52px;
+	            font-weight: 700;
+	            margin: 10px 0;
+                font-family: "Cairo", sans-serif;
+            }
+            .hero__text p {
+            	margin-bottom: 35px;
+                color: #6f6f6f;
+                font-family: "Cairo", sans-serif;
+            }  
+            a.btn-outline-primary{
+                font-family: "Poppins", sans-serif;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-size: 16px;
+                letter-spacing: 1px;
+                display: inline-block;
+                padding: 8px 28px;
+                border-radius: 50px;
+                transition: 0.5s;
+                margin: 10px;
+                border: 2px solid #7fad39;
+                color: #7fad39;
+            }
+
+            a.btn-outline-primary:hover{
+                background: #2dc997;
+                border: 2px solid #2dc997;
+            }    
+        </style>
     </head>
 
     <body>
@@ -37,18 +86,29 @@
     
     <!-- Page content -->
     <div class="content">
-        <div class="search">
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-row">
-                    <div class="col-10">
-                        <input type="text" class="form-control" placeholder="Search What you need..!">
-                    </div>
-                    <div class="col-2">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>Submit</button>
-                    </div>
+        <div class="hero__item set-bg" style="background-image: url('../static/image/agropic6.jpg'); width: 100%; background-size: cover;">
+            <div class="hero__text">
+                <span>FRUIT FRESH</span>
+                <h2>Vegetable <br>100% Organic</h2>
+                <p>Free Pickup and Delivery Available</p>
+                <a href=# class="btn btn-outline-primary">SHOP NOW</a>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" style="">
+            <div class="featured__item">
+                <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg" style="background-image: url(&quot;img/featured/feature-1.jpg&quot;);">
+                    <ul class="featured__item__pic__hover">
+                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
                 </div>
-            </form>
+                <div class="featured__item__text">
+                    <h6><a href="#">Crab Pool Security</a></h6>
+                    <h5>$30.00</h5>
+                </div>
+            </div>
         </div>
     </div>
 

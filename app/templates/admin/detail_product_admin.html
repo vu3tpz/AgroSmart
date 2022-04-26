@@ -1,9 +1,9 @@
-{% extends "seller/seller_home.html" %}
+{% extends "admin/admin_home.html" %}
 {% block content %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'seller/product.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'admin/admin_product.css' %}">
 
 <style>
 
@@ -144,43 +144,21 @@
           <div class="column">
             <h1 style="text-transform: uppercase; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: left;"><b>{{products.product_name}}</b></h1><p><b>({{products.category}})</b></p><hr>
             <h2><b>₹.{{products.price}}/<sub style="font-size: 18px;">{{products.price_per_quantity}}</sub></b></h2><br>
-            <p>{{products.describe}}</p>
-            <p>Add on {{products.joindate}}</p><hr>
+            <p>{{products.describe}}</p><hr>
+            <p>Add by <b>{{products.garden}}</b></p>
+            <p>Add on <b>{{products.joindate}}</b></p><hr>
 
 
-            {% if products.status is not True %}<font color='red'><b>Stock is still not approved by Admin</b></font><br>{% endif %}
-            {% if products.status is True %}
-            {% if products.activity is not True %}<font color='red'><b>Stock is not visible to customer</b></font><br>{% endif %}
-            {% if products.activity is True %}<font color='green'><b>Stock is visible to customer</b></font><br>{% endif %}
-            {% endif %}<br>
+            {% if products.activity is not True %}<font color='red'><b>Product is inactive</b></font><br>{% endif %}
+            {% if products.activity is True %}<font color='green'><b>Product is active</b></font><br>{% endif %}<br>
 
             {% if products.stock is not True %}<font color='red'><b>Product is now Out of stock</b></font>{% endif %}
             {% if products.stock is True %}<font color='green'><b>Product is now in stock</b></font>{% endif %}<hr>
 
-            <a type="button" class="btn btn-outline-info" style="width: 49%;" onclick="openForm()">Edit Price</a>
+            {% if products.activity is True %}<a type="button" class="btn btn-outline-warning" href="{% url 'inactive' %}?product_id={{products.pk}}" style="width: 100%;">Make product inactive</a><br>{% endif %}
+            {% if products.activity is not True %}<a type="button" class="btn btn-outline-success" href="{% url 'active' %}?product_id={{products.pk}}" style="width: 100%;">Make product active</a><br>{% endif %}<br>
 
-            {% if products.stock is True %}<a type="button" class="btn btn-outline-warning" href="{% url 'outofstock' %}?product_id={{products.pk}}" style="width: 49%;">Out of Stock</a><br>{% endif %}
-            {% if products.stock is not True %}<a type="button" class="btn btn-outline-success" href="{% url 'instock' %}?product_id={{products.pk}}" style="width: 49%;">Make Stock Avaliable</a><br>{% endif %}<br>
-
-            <a type="button" class="btn btn-outline-Danger" href="{% url 'delete_product_seller' %}?product_id={{products.pk}}" style="width: 100%;">Delete Product</a>
-
-            <div class="form-popup" id="myForm">
-              <form action="" method="POST" class="form-container">
-                {% csrf_token %} 
-                <h1>Edit Price</h1>
-
-                <hr>
-
-                <div class="form-row">
-                  <div class="form-group col-md-12 mb-0">
-                      {{ form.price | as_crispy_field }}
-                  </div>
-                </div>
-              
-                <button type="submit" class="btn btn-outline-warning" >Edit</button>
-                <a type="button" class="btn btn-outline-danger" onclick="closeForm()">Close</a>
-              </form>
-            </div>
+            <a type="button" class="btn btn-outline-Danger" href="{% url 'approve_product_delete' %}?product_id={{products.pk}}" style="width: 100%;">Delete Product</a>
 
           </div>
 
@@ -215,14 +193,6 @@
       buttonRight.addEventListener('click', function(){
         document.getElementById('slider').scrollLeft += 180
       })
-
-      function openForm() {
-        document.getElementById("myForm").style.display = "block";
-      }
-
-      function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-      }
 
     </script>
 
