@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import *
 from .forms import *
 from django.contrib.auth.models import Group
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
@@ -622,7 +622,17 @@ def visitor_fertilizer_request(request):
 @login_required(login_url='visitor_login')
 @user_passes_test(is_visitor)
 def visitor_market_home(request):
-    return render(request, 'visitor/visitor_market_home.html')
+    seller = Seller.objects.all().filter(status=True)
+    return render(request, 'visitor/visitor_market_home.html',{'seller':seller})
+
+#<-----Visitor Virtual Market Home----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def search(request):
+    if request.method=='POST':
+        search = request.POST.get('search')
+        product = Product.objects.all().filter(status=True,activity=True,product_name=search)
+    return render(request, 'visitor/search.html',{'search':search,'product':product})
 
 #<---------------------------------------------->#
 #<---------------Officer Functions-------------->#

@@ -96,6 +96,7 @@ urlpatterns = [
     path('visitor_fertilizer_request',visitor_fertilizer_request, name='visitor_fertilizer_request'),
 
     path('visitor_market_home',visitor_market_home, name='visitor_market_home'),
+    path('search',search, name='search'),
 
     #<-----Officer URLs----->
 

@@ -10,54 +10,6 @@
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'visitor/visitor_market_home.css' %}">
 
-        <style>
-            .hero__item {
-	            height: 431px;
-	            display: flex;
-	            align-items: center;
-	            padding-left: 75px;
-            }
-            .hero__text span {
-	            font-size: 14px;
-	            text-transform: uppercase;
-	            font-weight: 700;
-	            letter-spacing: 4px;
-	            color: #7fad39;
-                font-family: "Cairo", sans-serif;
-            }
-            .hero__text h2 {
-	            font-size: 46px;
-	            color: #000000;
-	            line-height: 52px;
-	            font-weight: 700;
-	            margin: 10px 0;
-                font-family: "Cairo", sans-serif;
-            }
-            .hero__text p {
-            	margin-bottom: 35px;
-                color: #6f6f6f;
-                font-family: "Cairo", sans-serif;
-            }  
-            a.btn-outline-primary{
-                font-family: "Poppins", sans-serif;
-                text-transform: uppercase;
-                font-weight: 500;
-                font-size: 16px;
-                letter-spacing: 1px;
-                display: inline-block;
-                padding: 8px 28px;
-                border-radius: 50px;
-                transition: 0.5s;
-                margin: 10px;
-                border: 2px solid #7fad39;
-                color: #7fad39;
-            }
-
-            a.btn-outline-primary:hover{
-                background: #2dc997;
-                border: 2px solid #2dc997;
-            }    
-        </style>
     </head>
 
     <body>
@@ -76,6 +28,7 @@
 
     <div class="sidebar">
         <a href="{% url 'visitor_market_home' %}"><i class="fas fa-home"></i>Home</a>
+        <a href="{% url 'search' %}"><i class="fas fa-home"></i>Search</a>
 
         <div class="logout">
             <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
@@ -83,7 +36,143 @@
     </div>
 
     {% block content %}
+
+    <style>
+        .hero__item {
+            height: 431px;
+            display: flex;
+            align-items: center;
+            padding-left: 75px;
+        }
+        .hero__text span {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #7fad39;
+            font-family: "Cairo", sans-serif;
+        }
+        .hero__text h2 {
+            font-size: 46px;
+            color: #000000;
+            line-height: 52px;
+            font-weight: 700;
+            margin: 10px 0;
+            font-family: "Cairo", sans-serif;
+        }
+        .hero__text p {
+            margin-bottom: 35px;
+            color: #6f6f6f;
+            font-family: "Cairo", sans-serif;
+        }  
+        a.btn-outline-primary{
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 50px;
+            transition: 0.5s;
+            margin: 10px;
+            border: 2px solid #7fad39;
+            color: #7fad39;
+        }
+
+        a.btn-outline-primary:hover{
+            background: #2dc997;
+            border: 2px solid #2dc997;
+        }    
+        .featured__item {
+            margin-bottom: 50px;
+        }
+
+        .featured__item:hover .featured__item__pic .featured__item__pic__hover {
+            bottom: 20px;
+        }
+
+        .featured__item__pic {
+            height: 270px;
+            position: relative;
+            overflow: hidden;
+            background-position: center center;
+        }
+
+        .featured__item__pic__hover {
+            position: absolute;
+            left: 0;
+            bottom: -50px;
+            width: 100%;
+            text-align: center;
+            -webkit-transition: all, 0.5s;
+            -moz-transition: all, 0.5s;
+            -ms-transition: all, 0.5s;
+            -o-transition: all, 0.5s;
+            transition: all, 0.5s;
+        }
+
+        .featured__item__pic__hover li {
+            list-style: none;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .featured__item__text {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .featured__item__text h6 {
+            margin-bottom: 10px;
+        }
+
+        .featured__item__text h6 a {
+            color: #252525;
+        }
+
+        .featured__item__text h5 {
+            color: #252525;
+            font-weight: 700;
+        }
+
+        .featured__item__pic {
+            height: 270px;
+            position: relative;
+            overflow: hidden;
+            background-position: center center;
+        }
+
+        #slide-wrapper{
+          max-width: 100%;
+          display: flex;
+          min-height: 100px;
+          align-items: center;
+          padding-top: 10px;
+        }
     
+        #slider{
+          width: 95%;
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: hidden;
+        }
+    
+        .arrow{
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+          transition: .3s;
+        }
+    
+        .arrow:hover{
+          opacity: .5;
+          width: 45px;
+          height: 45px;
+        }
+
+    </style>
+
     <!-- Page content -->
     <div class="content">
         <div class="hero__item set-bg" style="background-image: url('../static/image/agropic6.jpg'); width: 100%; background-size: cover;">
@@ -93,24 +182,119 @@
                 <p>Free Pickup and Delivery Available</p>
                 <a href=# class="btn btn-outline-primary">SHOP NOW</a>
             </div>
+        </div><br>
+
+        <div class="section-title" style="margin-bottom: 20px; text-align: center;">
+            <h2 style="font-family: Cairo, sans-serif; font-weight: 700;">Category</h2>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" >
-            <div class="featured__item">
-                <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg" style="background-image: url(&quot;img/featured/feature-1.jpg&quot;);">
-                    <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
+        <div id="slide-wrapper">
+            <img id="slideLeft" class="arrow" src="{% static 'image/leftarrow.png' %}" >
+            <div id="slider">
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic2.jpg'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>Vegitables</b></a></h6>
+                        </div>
+                    </div>
                 </div>
-                <div class="featured__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic3.jpg'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>Fruits</b></a></h6>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic4.jpg'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>seeds</b></a></h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic5.jpg'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>bio fertilizers</b></a></h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic7.jpg'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>Nuts</b></a></h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic8.jpg'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>spices</b></a></h6>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <img id="slideRight" class="arrow" src="{% static 'image/rightarrow.png' %}" >
         </div>
+        
+        <hr>
+
+        <div class="section-title" style="margin-bottom: 20px; text-align: center;">
+            <h2 style="font-family: Cairo, sans-serif; font-weight: 700;">Our Gardens</h2>
+        </div>
+
+        <div id="slide-wrapper">
+            <img id="slideLeft" class="arrow" src="{% static 'image/leftarrow.png' %}" >
+            <div id="slider">
+
+                {% for s in seller %}
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('{{s.logo.url}}'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>{{s.garden}}</b></a></h6>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+            <img id="slideRight" class="arrow" src="{% static 'image/rightarrow.png' %}" >
+        </div>
+
     </div>
+
+    <script type="text/javascript">
+        let buttonRight = document.getElementById('slideRight');
+      let buttonLeft = document.getElementById('slideLeft');
+
+      buttonLeft.addEventListener('click', function(){
+        document.getElementById('slider').scrollLeft -= 180
+      })
+
+      buttonRight.addEventListener('click', function(){
+        document.getElementById('slider').scrollLeft += 180
+      })
+    </script>
 
     {% endblock %}
 
