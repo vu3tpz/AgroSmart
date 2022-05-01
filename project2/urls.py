@@ -97,6 +97,11 @@ urlpatterns = [
 
     path('visitor_market_home',visitor_market_home, name='visitor_market_home'),
     path('search',search, name='search'),
+    path('<int:id>/view_product_visitor',view_product_visitor, name='view_product_visitor'),
+    
+    path('<int:id>/add_cart',add_cart, name='add_cart'),
+
+    path('cart',cart, name='cart'),
 
     #<-----Officer URLs----->
 

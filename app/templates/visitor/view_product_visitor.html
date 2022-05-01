@@ -1,0 +1,196 @@
+{% extends "visitor/visitor_market_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<style>
+
+  .content-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .column{
+    width: 600px;
+    padding: 10px;
+  }
+
+  #featured{
+    max-width: 500px;
+    max-height: 600px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-top: 20px;
+  }
+
+  .thumbnail{
+    object-fit: cover;
+    max-width: 180px;
+    max-height: 100px;
+    cursor: pointer;
+    opacity: 0.5;
+    margin: 5px;
+  }
+
+  .thumbnail:hover{
+    opacity: 1;
+  }
+
+  .active{
+    opacity: 1;
+  }
+
+  #slide-wrapper{
+    max-width: 500px;
+    display: flex;
+    min-height: 100px;
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  #slider{
+    width: 440px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+  }
+
+  .arrow{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  .arrow:hover{
+    opacity: .5;
+    width: 35px;
+    height: 35px;
+  }
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 450px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 500px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  padding: 10px 10px;
+  cursor: pointer;
+  width: 100%;
+  height: 45px;
+  margin-bottom:6px;
+  opacity: 0.8;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+</style>
+
+    <!-- Page content -->
+    <div class="content">
+
+      <div class="content-wrapper">
+          
+          <div class="column">
+            <img id="featured" src="{{products.image_1.url}}" >
+            
+            <div id="slide-wrapper">
+              <img id="slideLeft" class="arrow" src="{% static 'image/leftarrow.png' %}" >
+              <div id="slider">
+                <img class="thumbnail active" src="{{products.image_1.url}}" >
+                <img class="thumbnail" src="{{products.image_2.url}}" >
+                <img class="thumbnail" src="{{products.image_3.url}}" >
+                <img class="thumbnail" src="{{products.image_4.url}}" >
+              </div>
+              <img id="slideRight" class="arrow" src="{% static 'image/rightarrow.png' %}" >
+            </div>
+          </div>
+
+          <div class="column">
+            <h1 style="text-transform: uppercase; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: left;"><b>{{products.product_name}}</b></h1><p><b>({{products.category}})</b></p><hr>
+            <h2><b>₹.{{products.price}}/<sub style="font-size: 18px;">{{products.price_per_quantity}}</sub></b></h2><br>
+            <p>{{products.describe}}</p>
+            <p>Add on <b>{{products.joindate}}</b></p><hr>
+            <div class="media">
+              <img class="rounded-circle" src="{{products.seller.logo.url}}" alt="Garden Logo" style="object-fit: cover; width: 75px; height: 75px;">
+              <div class="media-body">
+                <p style="padding-left: 70px;">Add by <b><a>{{products.seller.garden}}</b></p>
+                <p style="padding-left: 70px;">District <b>{{products.seller.district}}</b></p>
+              </div>
+            </div><hr>
+
+            <a type="button" class="btn btn-outline-warning" href="{% url 'add_cart'  products.id %}" style="width: 100%;">Add to Cart</a><br><br>
+            
+            {% if products.stock is True %}<a type="button" class="btn btn-outline-success" href=# style="width: 100%;">Buy product</a><br>{% endif %}
+            {% if products.stock is not True %}<a type="button" class="btn btn-outline-danger" href=# style="width: 100%;" disabled>Out of Stock</a><br>{% endif %}
+
+          </div>
+
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+      let thumbnails = document.getElementsByClassName('thumbnail')
+
+      let activeImages = document.getElementsByClassName('active')
+
+      for (var i=0; i<thumbnails.length; i++){
+        thumbnails[i].addEventListener('mouseover', function(){
+          console.log(activeImages)
+
+          if (activeImages.length>0){
+            activeImages[0].classList.remove('active')
+          }
+          this.classList.add('active')
+          document.getElementById('featured').src=this.src
+        })
+      }
+
+      let buttonRight = document.getElementById('slideRight');
+      let buttonLeft = document.getElementById('slideLeft');
+
+      buttonLeft.addEventListener('click', function(){
+        document.getElementById('slider').scrollLeft -= 180
+      })
+
+      buttonRight.addEventListener('click', function(){
+        document.getElementById('slider').scrollLeft += 180
+      })
+
+    </script>
+
+{% endblock %}

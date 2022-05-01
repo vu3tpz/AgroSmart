@@ -29,6 +29,7 @@
     <div class="sidebar">
         <a href="{% url 'visitor_market_home' %}"><i class="fas fa-home"></i>Home</a>
         <a href="{% url 'search' %}"><i class="fas fa-home"></i>Search</a>
+        <a href="{% url 'cart' %}"><i class="fas fa-home"></i>Cart</a>
 
         <div class="logout">
             <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
@@ -179,8 +180,8 @@
             <div class="hero__text">
                 <span>FRUIT FRESH</span>
                 <h2>Vegetable <br>100% Organic</h2>
-                <p>Free Pickup and Delivery Available</p>
-                <a href=# class="btn btn-outline-primary">SHOP NOW</a>
+                <p>Buy Organic Product near to you.</p>
+                <a href="{% url 'search' %}" class="btn btn-outline-primary">SHOP NOW</a>
             </div>
         </div><br>
 

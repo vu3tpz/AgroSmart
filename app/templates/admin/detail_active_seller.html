@@ -1,80 +1,149 @@
 {% extends "admin/admin_home.html" %}
 {% block content %}
+{% load static %}
+
+<style>
+
+    .content-wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .column{
+      width: 500px;
+      padding: 10px;
+    }
+
+    img.featured{
+    width: 450px;
+    height: 450px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-top: 20px;
+  }
+
+  #slide-wrapper{
+          max-width: 100%;
+          display: flex;
+          min-height: 100px;
+          align-items: center;
+          padding-top: 10px;
+        }
+    
+        #slider{
+          width: 95%;
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: hidden;
+        }
+    
+        .arrow{
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+          transition: .3s;
+        }
+    
+        .arrow:hover{
+          opacity: .5;
+          width: 45px;
+          height: 45px;
+        }
+
+        .featured__item__text h6 {
+            margin-bottom: 10px;
+        }
+
+        .featured__item__text h6 a {
+            color: #252525;
+        }
+
+        .featured__item__text h5 {
+            color: #252525;
+            font-weight: 700;
+        }
+
+        .featured__item__pic {
+            height: 270px;
+            position: relative;
+            overflow: hidden;
+            background-position: center center;
+        }
+
+        .featured__item__text {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+</style>
 
     <!-- Page content -->
     <div class="content">
-        <h1>{{sellers.garden}}</h1>
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <img src="{{sellers.logo.url}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title"><b><u>{{sellers.garden}}</u></b></h5>
+        <div class="content-wrapper">
+            <div class="column">
+                <img src="{{sellers.logo.url}}" class="featured" alt="...">
+                <h3 class="card-title"><b><u>{{sellers.garden}}</u></b></h3>
                 <p class="card-text"><i>{{sellers.describe}}</i></p>
+            </div>
+
+            <div class="column">
+                <h1>{{sellers.garden}}</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p>Owened by <b>{{sellers.get_name}}</b></p>
+                            <p>Username <b>{{sellers.user}}</b></p>
+                            <p>Email id <b>{{sellers.email}}</b></p>
+                            <p>Gender <b>{{sellers.gender}}</b></p>
+                            <p>District <b>{{sellers.district}}</b></p>
+                        </div>
+                        <div class="col">
+                            <p>Join On <b>{{sellers.joindate}}</b></p>
+                            <p>Address: <b>{{sellers.address|linebreaks}}</b></p>
+                        </div>
+                    </div>
+                </div><hr>
+                <a type="button" class="btn btn-outline-Danger" href="{% url 'delete_seller_active' %}?seller_id={{sellers.pk}}" style="width: 100%;">Delete Seller</a>
+            </div>
+        </div><hr>
+        <h3 style="padding-bottom: 20px;"><b><u>Products</u></b></h3>
+
+        <div id="slide-wrapper">
+            <img id="slideLeft" class="arrow" src="{% static 'image/leftarrow.png' %}" >
+            <div id="slider">
+
+                {% for p in products %}
+                <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" style="background-image: url('{{p.image_1.url}}'); background-size: cover;">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'detail_product_admin'  p.id %}"><b>{{p.product_name}}</b></a></h6>
+                        </div>
+                    </div>
                 </div>
+                {% empty %}
+                <h3 style="text-align: center;"><b>Their is no Approved Product</b></h3>
+                {% endfor %}
+
             </div>
-            <div class="row1">
-                <table class="table">
-                    <tr>
-                        <th scope="row">Owner Name</th>
-                        <td>:</td>
-                        <td><i>{{sellers.get_name}}</i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Username</th>
-                        <td>:</td>
-                        <td><i>{{sellers.user}}</i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">District</th>
-                        <td>:</td>
-                        <td><i>{{sellers.district}}</i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Gender</th>
-                        <td>:</td>
-                        <td><i>{{sellers.gender}}</i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Gender</th>
-                        <td>:</td>
-                        <td><i>{{sellers.joindate}}</i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Email id</th>
-                        <td>:</td>
-                        <td><i>{{sellers.email}}</i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Address</th>
-                        <td>:</td>
-                        <td><i>{{sellers.address|linebreaks }}</i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Delete</th>
-                        <td>:</td>
-                        <td><a class="btn btn-danger" href="{% url 'delete_seller_active' %}?seller_id={{sellers.pk}}">Delete</a></td>
-                    </tr>
-                </table>
-            </div>
+            <img id="slideRight" class="arrow" src="{% static 'image/rightarrow.png' %}" >
         </div>
     </div>
 
-    <style>
-        .row{
-            padding-left: 20px;   
-        }
-        
-        .row1{
-            padding-left: 30px;
-        }
+    <script type="text/javascript">
+        let buttonRight = document.getElementById('slideRight');
+      let buttonLeft = document.getElementById('slideLeft');
 
-        .table tr , .table th, .table td{
-            border: none;
-            padding-left: 30px;
-            text-align: left;
-            font-size: 24px;
-            padding-top: 30px;
-        }
-    </style>
+      buttonLeft.addEventListener('click', function(){
+        document.getElementById('slider').scrollLeft -= 180
+      })
+
+      buttonRight.addEventListener('click', function(){
+        document.getElementById('slider').scrollLeft += 180
+      })
+    </script>
 
 {% endblock %}

@@ -38,7 +38,7 @@ class Visitor(models.Model):
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     status = models.BooleanField(default=False)
     def __str__(self):
-        return self.user.first_name
+        return str(self.id)
     @property
     def get_id(self):
         return self.user.id
@@ -73,7 +73,7 @@ class Officer(models.Model):
     email = models.EmailField(unique=True)
     gender = models.CharField(max_length=20)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-    answer = models.CharField(max_length=100)
+    status = models.BooleanField(default=False)
     def __str__(self):
         return self.user.first_name
     @property
@@ -175,7 +175,7 @@ class Seller(models.Model):
     status = models.BooleanField(default=False)
     
     def __str__(self):
-        return self.user.first_name
+        return str(self.user.id)
     @property
     def get_id(self):
         return self.user.id
@@ -194,9 +194,8 @@ class Product(models.Model):
     image_2 = models.ImageField(upload_to='product image/')
     image_3 = models.ImageField(upload_to='product image/')
     image_4 = models.ImageField(upload_to='product image/')
-    garden = models.CharField(max_length=50)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     category = models.CharField(max_length=30)
-    district = models.CharField(max_length=30)
     price = models.IntegerField(5)
     price_per_quantity = models.CharField(max_length=20)
     status = models.BooleanField(default=False)
@@ -205,3 +204,8 @@ class Product(models.Model):
 
     def __self__(self):
         return self.id
+
+class Cart(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now_add=True)

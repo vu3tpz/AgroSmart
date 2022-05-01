@@ -2,16 +2,12 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import *
 from .forms import *
 from django.contrib.auth.models import Group
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.conf import settings
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 import pandas as pd
 import numpy as np
 from sklearn import metrics
@@ -240,8 +236,10 @@ def admin_active_seller(request):
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
 def detail_active_seller(request, id):
+    products=''
     sellers = Seller.objects.all().get(id=id)
-    data={'sellers':sellers}
+    products = Product.objects.all().filter(seller=id,status=True)
+    data={'sellers':sellers,'products':products}
     return render(request, 'admin/detail_active_seller.html',data)
 
 @login_required(login_url='admin_login')
@@ -629,10 +627,37 @@ def visitor_market_home(request):
 @login_required(login_url='visitor_login')
 @user_passes_test(is_visitor)
 def search(request):
+    search=''
+    product=''
     if request.method=='POST':
         search = request.POST.get('search')
         product = Product.objects.all().filter(status=True,activity=True,product_name=search)
     return render(request, 'visitor/search.html',{'search':search,'product':product})
+
+#<-----Visitor Detail view of product----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def view_product_visitor(request, id):
+    products = Product.objects.all().get(id=id)
+    return render(request, 'visitor/view_product_visitor.html',{'products':products})
+
+#<-----add to cart----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def add_cart(request, id):
+    product = Product.objects.all().get(id=id)
+    visitor = request.user.visitor
+    req=Cart.objects.create(product=product, visitor=visitor)
+    req.save()
+    return redirect(reverse('search'))
+
+#<-----cart view----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def cart(request):
+    visitor = request.user.visitor
+    cart = Cart.objects.all().filter(visitor=visitor)
+    return render(request, 'visitor/cart.html',{'cart':cart})
 
 #<---------------------------------------------->#
 #<---------------Officer Functions-------------->#
@@ -981,12 +1006,6 @@ def seller_signup(request):
             my_seller_group=Group.objects.get_or_create(name='SELLER')
             my_seller_group[0].user_set.add(user)
 
-            #subject = 'Welcome Note'
-            #message = 'welcome to Agrosmart Virtual market please wait for our conformation mail to access our market..!\nwe also send an mail if your request will reject..\nIt is an auto generated mauil system Do not reply to this mail'
-            #recipient = form2.cleaned_data.get('email')
-            #send_mail(subject, 
-            #  message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
-
             messages.success(request, 'Request send for approval, If request is accept we send you a Email..')
 
             return HttpResponseRedirect('/')
@@ -1028,7 +1047,7 @@ def seller_home(request):
 @login_required(login_url='seller_login')
 @user_passes_test(is_seller)
 def product(request):
-    products = Product.objects.all().filter(garden=request.user.seller.garden)
+    products = Product.objects.all().filter(seller=request.user.seller.id)
     return render(request, 'seller/product.html',{'products':products})
 
 #<-----Detail view of product----->#
@@ -1062,13 +1081,12 @@ def add_product(request):
             image_2 = request.FILES.get('image_2')
             image_3 = request.FILES.get('image_3')
             image_4 = request.FILES.get('image_4')
-            district = str(request.user.seller.district)
-            garden = request.user.seller.garden
+            seller = str(request.user.seller.id)
             category=request.POST.get('category')
             price = request.POST.get('price')
             price_per_quantity = request.POST.get('price_per_quantity')
 
-            req=Product.objects.create(product_name=product_name, describe=describe, image_1=image_1, image_2=image_2, image_3=image_3, image_4=image_4, district=district, garden=garden, category=category, price=price, price_per_quantity=price_per_quantity)
+            req=Product.objects.create(product_name=product_name, describe=describe, image_1=image_1, image_2=image_2, image_3=image_3, image_4=image_4, seller_id = seller, category=category, price=price, price_per_quantity=price_per_quantity)
             req.save()
 
             return HttpResponseRedirect('seller_home')

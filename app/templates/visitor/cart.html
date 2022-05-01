@@ -1,0 +1,48 @@
+{% extends "visitor/visitor_market_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+<style>
+#featured{
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-top: 20px;
+  }
+
+  .column{
+    width: 350px;
+    padding: 10px;
+  }
+
+  .content-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+</style>
+
+<div class="content">
+    {% for c in cart %}
+    <div class="content-wrapper">
+        <div class="column">
+          <img id="featured" src="{{c.product.image_1.url}}" >
+          <h4 style="text-transform: uppercase; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center;"><b>{{c.product.product_name}}</b></h4>
+        </div>
+        <div class="column">
+            <p><b>₹.{{c.product.price}}/<sub style="font-size: 18px;">{{c.product.price_per_quantity}}</sub></b></p>
+            <p>Product by <b>{{c.product.seller.garden}}</b></p>
+            <p>Add to Cart On <b>{{c.created_at}}</b></p>
+        </div>
+        <div class="column">
+            <a type="button" class="btn btn-outline-success" href=# style="width: 100%;">Buy Product</a><br><br>
+            <a type="button" class="btn btn-outline-danger" href=# style="width: 100%;">Remove from cart</a>
+        </div>
+    </div><hr>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -30,7 +30,7 @@
                 <tr>
                     <th>{{ forloop.counter }}</th>
                     <td>{{p.product_name}}</td>
-                    <td>{{p.garden}}</td>
+                    <td>{{p.seller.garden}}</td>
                     <td>{% if p.stock is not True %}<font color='red'><b>Out of stock</b></font>{% endif %}{% if p.stock is True %}<font color='green'><b>Stock avaliable</b></font>{% endif %}</td>
                     <td>{{p.price}} for {{p.price_per_quantity}}</td>
                     <td>{{p.joindate}}</td>

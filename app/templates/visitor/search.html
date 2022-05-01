@@ -74,7 +74,7 @@
         }
 
         .featured__item__text h6 {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .featured__item__text h6 a {
@@ -108,17 +108,25 @@
         </div>
     </form>
     <hr>
+    <p style="font-family: Cairo, sans-serif; opacity: .5;">Search Result for "{{ search }}"</p>
+    <hr>
 
     {% for p in product %}
-    <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block;" >
+    <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block; width: 24%;">
         <div class="featured__item">
             <div class="featured__item__pic set-bg" style="background-image: url('{{p.image_1.url}}'); background-size: cover;">
             </div>
             <div class="featured__item__text">
-                <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>{{p.product_name}}</b></a></h6>
+                <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'view_product_visitor'  p.id %}" ><b>{{p.product_name}}</b></a></h6>
+                <h5 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><b>₹.{{p.price}}</b></h5>
             </div>
         </div>
     </div>
+    {% empty %}
+    <center>
+        <img src="{% static 'image/empty1.png' %}" width="450" height="400">
+        <p style="text-transform: uppercase; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><b>Search Product</b></p>
+    </center>
     {% endfor %}
 
 </div>
