@@ -1,0 +1,110 @@
+{% extends "visitor/visitor_market_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<style>
+
+    #featured{
+        max-width: 300px;
+        max-height: 400px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 5px;
+        padding-top: 20px;
+      }
+    
+      .column{
+        width: 350px;
+        padding: 10px;
+      }
+    
+      .column1{
+        width: 49%;
+        padding: 10px;
+      }
+
+
+      .content-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      textarea{
+    height: 150px;
+}
+
+label{
+    font-weight: bold;
+}
+
+input[type=text],input[type=email]{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+    font-weight: bold;
+}
+
+.form-control{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: 1px solid black;
+    background: #f1f1f1;
+}
+    
+    </style>
+
+<div class="content">
+    <div class="content-wrapper">
+        <div class="column">
+          <img id="featured" src="{{product.image_1.url}}" >
+          <h4 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-top: 10px;"><b>{{product.product_name}}</b></h4>
+        </div>
+        <div class="column">
+            <p><b>₹.{{product.price}}/<sub style="font-size: 18px;">{{product.price_per_quantity}}</sub></b></p>
+            <p><b>{{product.category}}</b></p>
+            <p>Product by <b>{{product.seller.garden}}</b></p>
+        </div>
+        <div class="column">
+            <p>{{product.describe}}</p>
+        </div>
+    </div><hr>
+
+    <div>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="content-wrapper">
+          <div class="column1">
+            <div class="form-group col-md-12 mb-0">
+              {{ form.address | as_crispy_field }}
+            </div>
+            <div class="form-group col-md-12 mb-0">
+              {{ form.quantity | as_crispy_field }}
+            </div>
+          </div>
+
+          <div class="column1">
+            <div class="submit">
+              <button type="submit" class="btn btn-outline-success" style="width: 100%;" href="{% url 'visitor_order_confirm'  product.id %}">Confirm</button><br><br>
+              <button type="reset" class="btn btn-outline-warning" style="width: 100%;">Reset</button><br><br>
+              <p style="color: red; padding-left: 20px; padding-right: 20px;">*Terms and Conditions :- Product is not shipped or delevered by this website, It is only through {{product.seller.garden}}.</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+</div>
+
+{% endblock %}

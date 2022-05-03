@@ -145,16 +145,17 @@
             <p>{{products.describe}}</p>
             <p>Add on <b>{{products.joindate}}</b></p><hr>
             <div class="media">
-              <img class="rounded-circle" src="{{products.seller.logo.url}}" alt="Garden Logo" style="object-fit: cover; width: 75px; height: 75px;">
+              <img class="rounded-circle border border-success" src="{{products.seller.logo.url}}" alt="Garden Logo" style="object-fit: cover; width: 75px; height: 75px;">
               <div class="media-body">
                 <p style="padding-left: 70px;">Add by <b><a>{{products.seller.garden}}</b></p>
                 <p style="padding-left: 70px;">District <b>{{products.seller.district}}</b></p>
               </div>
             </div><hr>
 
-            <a type="button" class="btn btn-outline-warning" href="{% url 'add_cart'  products.id %}" style="width: 100%;">Add to Cart</a><br><br>
+            {% if cart.product.id is not products.id %}<a type="button" class="btn btn-outline-warning" href="{% url 'add_cart'  products.id %}" style="width: 100%;">Add to Cart</a><br><br>{% endif %}
+            {% if cart.product.id is products.id %}<a type="button" class="btn btn-outline-info" href="{% url 'cart' %}" style="width: 100%;">Product already in Cart</a><br><br>{% endif %}
             
-            {% if products.stock is True %}<a type="button" class="btn btn-outline-success" href=# style="width: 100%;">Buy product</a><br>{% endif %}
+            {% if products.stock is True %}<a type="button" class="btn btn-outline-success" href="{% url 'visitor_order'  products.id %}" style="width: 100%;">Buy product</a><br>{% endif %}
             {% if products.stock is not True %}<a type="button" class="btn btn-outline-danger" href=# style="width: 100%;" disabled>Out of Stock</a><br>{% endif %}
 
           </div>

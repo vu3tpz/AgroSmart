@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from pyparsing import empty
 from .models import *
 from .forms import *
 from django.contrib.auth.models import Group
@@ -638,8 +639,10 @@ def search(request):
 @login_required(login_url='visitor_login')
 @user_passes_test(is_visitor)
 def view_product_visitor(request, id):
+    visitor = request.user.visitor
     products = Product.objects.all().get(id=id)
-    return render(request, 'visitor/view_product_visitor.html',{'products':products})
+    cart = Cart.objects.all().filter(visitor=visitor).first()
+    return render(request, 'visitor/view_product_visitor.html',{'products':products,'cart':cart})
 
 #<-----add to cart----->#
 @login_required(login_url='visitor_login')
@@ -649,7 +652,7 @@ def add_cart(request, id):
     visitor = request.user.visitor
     req=Cart.objects.create(product=product, visitor=visitor)
     req.save()
-    return redirect(reverse('search'))
+    return redirect(reverse('visitor_market_home'))
 
 #<-----cart view----->#
 @login_required(login_url='visitor_login')
@@ -658,6 +661,66 @@ def cart(request):
     visitor = request.user.visitor
     cart = Cart.objects.all().filter(visitor=visitor)
     return render(request, 'visitor/cart.html',{'cart':cart})
+
+#<-----delete cart----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def delete_cart(request):
+    cart=get_object_or_404(Cart, pk=request.GET.get('cart_id'))
+    cart.delete()
+    return redirect(reverse('cart'))
+
+#<-----Order page----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def visitor_order(request, id):
+    product = Product.objects.all().get(id=id)
+    if request.method=='POST':
+        form=OrderForm(request.POST)
+        if form.is_valid():
+            product = Product.objects.all().get(id=id)
+            visitor = request.user.visitor
+            address = request.POST.get('address')
+            quantity = request.POST.get('quantity')
+            #total_price = int(quantity) * int(product.price)
+            req=Order.objects.create(product=product, visitor=visitor, address=address, quantity=quantity)
+            req.save()
+            cart = Cart.objects.all().filter(product=id)
+            if cart is not empty:
+                cart.delete()
+            order = Order.objects.all().get(product=id)
+            return redirect('visitor_order_confirm', id=order.id)
+    else:
+        form=OrderForm()
+    return render(request, 'visitor/visitor_order.html',{'product':product, 'form':form})
+
+#<-----Order confirm page----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def visitor_order_confirm(request, id):
+    order = Order.objects.all().get(id=id)
+    if request.method=='POST':
+        order = Order.objects.all().get(id=id)
+        name = request.POST.get('cardname')
+        card_number = request.POST.get('cardnumber')
+        month = request.POST.get('month')
+        year = request.POST.get('year')
+        cvv_number = request.POST.get('cvv')
+        amount = int(order.quantity) * int(order.product.price) + 25
+        req = Pay.objects.create(order=order, name=name, card_number=card_number, month=month, year=year, cvv_number=cvv_number, amount=amount)
+        req.save()
+        order.payment=True
+        order.save()
+        return redirect('your_order')
+    return render(request, 'visitor/visitor_order_confirm.html',{'order':order})
+
+#<-----cart view----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def your_order(request):
+    visitor = request.user.visitor
+    order = Order.objects.all().filter(visitor=visitor)
+    return render(request, 'visitor/your_order.html',{'order':order})
 
 #<---------------------------------------------->#
 #<---------------Officer Functions-------------->#

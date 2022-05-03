@@ -1,6 +1,8 @@
-from unicodedata import category
+from django.core.validators import MaxValueValidator, MinValueValidator
 from djongo import models
 from django.contrib.auth.models import User
+from decimal import Decimal
+from django.db.models import F, Sum
 
 # Create your models here.
 
@@ -196,7 +198,7 @@ class Product(models.Model):
     image_4 = models.ImageField(upload_to='product image/')
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     category = models.CharField(max_length=30)
-    price = models.IntegerField(5)
+    price = models.IntegerField()
     price_per_quantity = models.CharField(max_length=20)
     status = models.BooleanField(default=False)
     stock = models.BooleanField(default=True)
@@ -209,3 +211,32 @@ class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
+
+class Order(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1, validators=[MaxValueValidator(10), MinValueValidator(1)])
+    address = models.CharField(max_length=500)
+    shipped = models.BooleanField(default=False)
+    delivered = models.BooleanField(default=False)
+    order = models.BooleanField(default=True)
+    payment=models.BooleanField(default=False)
+    order_on = models.DateField(auto_now_add=True)
+
+    def __self__(self):
+        return self.id
+
+class Pay(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    card_number = models.CharField(max_length=20)
+    month = models.IntegerField()
+    year = models.IntegerField()
+    cvv_number = models.IntegerField()
+    amount = models.IntegerField()
+    payment_on = models.DateField(auto_now_add=True)
+
+    def __self__(self):
+        return self.id
+
+    

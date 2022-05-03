@@ -1,0 +1,165 @@
+{% extends "visitor/visitor_market_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load mathfilters %}
+
+<style>
+
+    #featured{
+        max-width: 300px;
+        max-height: 400px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 5px;
+        padding-top: 20px;
+      }
+    
+      .column{
+        width: 400px;
+        padding: 5px;
+        text-align: center;
+      }
+    
+      .column1{
+        width: 49%;
+        padding: 10px;
+      }
+
+
+      .content-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+label{
+    font-weight: bold;
+}
+
+input[type=text]{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus {
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+.form-control{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: 1px solid black;
+    background: #f1f1f1;
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+}
+    
+    </style>
+
+<div class="content">
+    <div class="content-wrapper">
+        <div class="column">
+          <img id="featured" src="{{order.product.image_1.url}}" >
+          <h4 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-top: 10px;"><b>{{order.product.product_name}}</b></h4>
+        </div>
+        <div class="column" style="text-align: left; padding-left: 100px;">
+            <p><b>₹.{{order.product.price}}/<sub style="font-size: 18px;">{{order.product.price_per_quantity}}</sub></b></p>
+            <p><b>{{order.product.category}}</b></p>
+            <p>Product by <b>{{order.product.seller.garden}}</b></p>
+            <p>Quantity <b>{{order.quantity}}</b></p>
+        </div>
+        <div class="column">
+            <p>{{order.product.describe}}</p>
+        </div>
+    </div><hr>
+
+    <h3 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-bottom: 15px;"><b><u>Details</u></b></h3>
+    <div class="content-wrapper">
+        <div class="column">
+            <p>Name <b>{{order.visitor.get_name}}</b></p>
+            <p>Email id <b>{{order.visitor.email}}</b></p>
+        </div>
+        <div class="column">
+            <p>Address <b>{{order.address}}</b></p>
+            <p>District <b>{{order.visitor.district}}</b></p>
+        </div>
+        <div class="column" style="text-align: right; padding-right: 100px;">
+            <p style="text-transform: uppercase;">product Price : <b>₹{{order.product.price}}*{{order.quantity}} = ₹{{order.product.price|mul:order.quantity}}</b></p>
+            <p style="text-transform: uppercase;">Delivery charge : <b>₹25</b></p><hr>
+            <p style="text-transform: uppercase;">Total Amount : <b>₹{{order.product.price|mul:order.quantity|add:25}}</b></p>
+        </div>
+    </div><hr>
+
+    <h3 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-bottom: 15px;"><b><u>Payment Details</u></b></h3>
+    <div class="content-wrapper">
+
+        <div class="tab-content">
+            <!-- credit card info-->
+            <div id="credit-card" class="tab-pane fade show active pt-3">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group"> 
+                        <label for="cardname">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif; font-weight: bold;">Card Owner</h6>
+                        </label> 
+                        <input type="text" id="cardname" name="cardname" placeholder="Card Owner Name" required class="form-control "> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="cardnumber">
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif; font-weight: bold;">Card number</h6>
+                        </label>
+                        <div class="input-group"> 
+                            <input type="text" id="cardnumber" name="cardnumber" placeholder="Valid card number" class="form-control " required>
+                            <div class="input-group-append"> 
+                                <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group"> 
+                                <label>
+                                    <span class="hidden-xs">
+                                        <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif; font-weight: bold;">Expiration Date</h6>
+                                    </span>
+                                </label>
+                                <div class="input-group"> 
+                                    <input type="number" maxlength="2" min="1" max="12" placeholder="MM" id="month" name="month" class="form-control" required> 
+                                    <input type="number" maxlength="4" min="2022" Max="2050" placeholder="YYYY" id="year" name="year" class="form-control" required> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group mb-4"> 
+                                <label data-toggle="tooltip" title="Three digit CVV code on the back of your card">
+                                    <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif; font-weight: bold;">CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                </label> 
+                                <input type="password" name="cvv" id="cvv" maxlength="3" required class="form-control"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer"> 
+                        <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

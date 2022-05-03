@@ -13,8 +13,9 @@
   }
 
   .column{
-    width: 350px;
-    padding: 10px;
+    width: 400px;
+    padding: 5px;
+    text-align: center;
   }
 
   .content-wrapper{
@@ -30,18 +31,26 @@
     <div class="content-wrapper">
         <div class="column">
           <img id="featured" src="{{c.product.image_1.url}}" >
-          <h4 style="text-transform: uppercase; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center;"><b>{{c.product.product_name}}</b></h4>
+          <h4 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-top: 10px;"><a style="color: #252525;" href="{% url 'view_product_visitor'  c.product.id %}" ><b>{{c.product.product_name}}</b></a></h4>
         </div>
         <div class="column">
             <p><b>₹.{{c.product.price}}/<sub style="font-size: 18px;">{{c.product.price_per_quantity}}</sub></b></p>
+            <p><b>{{c.product.category}}</b></p>
             <p>Product by <b>{{c.product.seller.garden}}</b></p>
             <p>Add to Cart On <b>{{c.created_at}}</b></p>
         </div>
         <div class="column">
-            <a type="button" class="btn btn-outline-success" href=# style="width: 100%;">Buy Product</a><br><br>
-            <a type="button" class="btn btn-outline-danger" href=# style="width: 100%;">Remove from cart</a>
+            {% if c.product.stock is True %}<a type="button" class="btn btn-outline-success" href="{% url 'visitor_order' c.product.id %}" style="width: 100%;">Buy Product</a><br><br>{% endif %}
+            {% if c.product.stock is not True %}<a type="button" class="btn btn-outline-warning" href=# style="width: 100%;" disabled>Out of Stock</a><br><br>{% endif %}
+
+            <a type="button" class="btn btn-outline-danger" href="{% url 'delete_cart' %}?cart_id={{c.pk}}" style="width: 100%;">Remove from cart</a>
         </div>
     </div><hr>
+    {% empty %}
+    <center>
+        <img src="{% static 'image/empty2.png' %}" width="500" height="400">
+        <p style="text-transform: uppercase; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><b>Cart is empty</b></p>
+    </center>
     {% endfor %}
 </div>
 

@@ -102,6 +102,12 @@ urlpatterns = [
     path('<int:id>/add_cart',add_cart, name='add_cart'),
 
     path('cart',cart, name='cart'),
+    path('delete_cart',delete_cart, name='delete_cart'),
+
+    path('<int:id>/visitor_order',visitor_order, name='visitor_order'),
+    path('<int:id>/visitor_order_confirm',visitor_order_confirm, name='visitor_order_confirm'),
+
+    path('your_order',your_order, name='your_order'),
 
     #<-----Officer URLs----->
 

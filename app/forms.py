@@ -372,3 +372,24 @@ class EditPriceForm(forms.ModelForm):
     class Meta:
         model=Product
         fields=['price']
+
+QUAN=(
+    ("1","1"),
+    ("2","2"),
+    ("3","3"),
+    ("4","4"),
+    ("5","5"),
+    ("6","6"),
+    ("7","7"),
+    ("8","8"),
+    ("9","9"),
+    ("10","10"),
+)
+
+class OrderForm(forms.ModelForm):
+    quantity = forms.ChoiceField(choices=QUAN,widget=forms.Select(attrs={'class':'form-control'}), required=True)
+    address = forms.CharField(widget=forms.Textarea(attrs={'class':'forms-control','placeholder':'Enter your delivery Address..'}), required=True)
+
+    class Meta:
+        model=Order
+        fields=['quantity','address']
