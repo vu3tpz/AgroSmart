@@ -622,7 +622,11 @@ def visitor_fertilizer_request(request):
 @user_passes_test(is_visitor)
 def visitor_market_home(request):
     seller = Seller.objects.all().filter(status=True)
-    return render(request, 'visitor/visitor_market_home.html',{'seller':seller})
+    visitor = request.user.visitor
+    cart_count = Cart.objects.all().filter(visitor=visitor).count()
+    order_count = Order.objects.all().filter(visitor=visitor, payment=False).count()
+    pay_count = Order.objects.all().filter(visitor=visitor, payment=True).count()
+    return render(request, 'visitor/visitor_market_home.html',{'seller':seller,'cart_count':cart_count,'order_count':order_count,'pay_count':pay_count})
 
 #<-----Visitor Virtual Market Home----->#
 @login_required(login_url='visitor_login')
@@ -682,14 +686,12 @@ def visitor_order(request, id):
             visitor = request.user.visitor
             address = request.POST.get('address')
             quantity = request.POST.get('quantity')
-            #total_price = int(quantity) * int(product.price)
             req=Order.objects.create(product=product, visitor=visitor, address=address, quantity=quantity)
             req.save()
             cart = Cart.objects.all().filter(product=id)
             if cart is not empty:
                 cart.delete()
-            order = Order.objects.all().get(product=id)
-            return redirect('visitor_order_confirm', id=order.id)
+            return redirect('pending_order')
     else:
         form=OrderForm()
     return render(request, 'visitor/visitor_order.html',{'product':product, 'form':form})
@@ -717,10 +719,37 @@ def visitor_order_confirm(request, id):
 #<-----cart view----->#
 @login_required(login_url='visitor_login')
 @user_passes_test(is_visitor)
-def your_order(request):
+def pending_order(request):
     visitor = request.user.visitor
-    order = Order.objects.all().filter(visitor=visitor)
-    return render(request, 'visitor/your_order.html',{'order':order})
+    order = Order.objects.all().filter(visitor=visitor, payment=False)
+    return render(request, 'visitor/pending_order.html',{'order':order})
+
+#<-----Remove order from pending order----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def remove_order(request):
+    order=get_object_or_404(Order, pk=request.GET.get('order_id'))
+    order.delete()
+    return redirect(reverse('pending_order'))
+
+#<-----View your order----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def your_order(request):
+    visitor=request.user.visitor
+    order = Order.objects.all().filter(visitor=visitor, payment=True)
+    pay = Pay.objects.all().filter(order__in=order)
+    zippedList = zip(order, pay)
+    return render(request, 'visitor/your_order.html',{'zippedList':zippedList})
+
+#<-----Cancel order----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def cancel_order(request):
+    order=get_object_or_404(Order, pk=request.GET.get('order_id'))
+    order.order=False
+    order.save()
+    return redirect(reverse('your_order'))
 
 #<---------------------------------------------->#
 #<---------------Officer Functions-------------->#
@@ -1182,3 +1211,10 @@ def delete_product_seller(request):
     product=get_object_or_404(Product, pk=request.GET.get('product_id'))
     product.delete()
     return redirect(reverse('product'))
+
+#<-----new order page----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def new_order_seller(request):
+    orders = Order.objects.all().filter(payment=True)
+    return render(request, 'seller/new_order_seller.html',{'orders':orders})

@@ -29,26 +29,33 @@
 </style>
 
 <div class="content">
-    {% for o in order %}
+    {% for o,p in zippedList %}
     <div class="content-wrapper">
         <div class="column">
           <img id="featured" src="{{o.product.image_1.url}}" >
           <h4 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-top: 10px;"><a style="color: #252525;"><b>{{o.product.product_name}}</b></a></h4>
         </div>
         <div class="column" style="text-align: left; padding-left: 80px;">
-            <p><b>₹.{{o.product.price}}/<sub style="font-size: 18px;">{{o.product.price_per_quantity}}</sub></b></p>
+            {% if o.payment is False %}<p><b>₹.{{o.product.price}}/<sub style="font-size: 18px;">{{o.product.price_per_quantity}}</sub></b></p>{% endif %}
             <p><b>{{o.product.category}}</b></p>
             <p>Product by <b>{{o.product.seller.garden}}</b></p>
+            {% if o.payment is False %}<p>Total Amount <b>₹{{o.product.price|mul:o.quantity|add:25}}</b></p>{% endif %}
+            {% if p.order.payment is True and p.order_id is o.id %}<p>Total Amount <b>₹{{p.amount}}</b></p>{% endif %}
+            
             <p>Ordered on <b>{{o.order_on}}</b></p>
-            <p>Total Amount <b>₹{{o.product.price|mul:o.quantity|add:25}}</b></p>
+            {% if p.order.payment is True %}<p>Payment on <b>{{p.payment_on}}</b></p>{% endif %}
         </div>
         <div class="column">
-            {% if o.payment is False %}<p style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; color: orange;">Payment is still Pending</p>{% endif %}
 
-            {% if o.product.stock is True %}{% if o.payment is False %}<a type="button" class="btn btn-outline-success" href="{% url 'visitor_order_confirm'  o.id %}" style="width: 100%;">Go to Payment Page</a><br><br>{% endif %}{% endif %}
-            {% if o.product.stock is False %}{% if o.payment is False %}<a type="button" class="btn btn-outline-warning" href=# style="width: 100%;">Out of Stock</a><br><br>{% endif %}{% endif %}
+            {% if o.order is True and o.shipped is False %}<p style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; color: orange;">Delivery is in process</p>{% endif %}
+            {% if o.order is True and o.shipped is False %}<a type="button" class="btn btn-outline-danger" href="{% url 'cancel_order' %}?order_id={{o.pk}}" style="width: 100%;">Cancel Order</a>{% endif %}
+            
+            {% if o.order is True and o.shipped is True %}<p style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; color: green;">Your Order Shipped</p>{% endif %}
+            {% if o.order is True and o.shipped is True %}<a type="button" class="btn btn-outline-danger" href="{% url 'cancel_order' %}?order_id={{o.pk}}" style="width: 100%;">Cancel Order</a>{% endif %}
+            
+            {% if o.order is False and o.delivered is True %}<img src="{% static 'image/delevery.jpg' %}" width="250" height="100">{% endif %}
 
-            {% if o.payment is False %}<a type="button" class="btn btn-outline-danger" href=# style="width: 100%;">Cancel Order</a><br><br>{% endif %}
+            {% if o.order is False and o.delivered is False %}<img src="{% static 'image/cancel.jpg' %}" width="250" height="100">{% endif %}
         </div>
     </div><hr>
     {% empty %}

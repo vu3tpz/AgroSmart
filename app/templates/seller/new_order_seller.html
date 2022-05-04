@@ -1,0 +1,40 @@
+{% extends "seller/seller_home.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'seller/product.css' %}">
+
+    <!-- Page content -->
+    <div class="content">
+
+        <h1><u><b>New Order</b></u></h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SL NO.</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Order On</th>
+                    <th scope="col">Know More</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for o in orders %}
+                <tr>
+                    {% if o.product.seller.get_garden is user.seller.get_garden %}
+                    <th>{{ forloop.counter }}</th>
+                    <td>{{o.product.product_name}}</td>
+                    <td>{{o.visitor.get_name}}</td>
+                    <td>{{o.quantity}}</td>
+                    <td>{{o.order_on}}</td>
+                    <td><a class="btn btn-success" href=#>View</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

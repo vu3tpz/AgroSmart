@@ -96,7 +96,7 @@ input[type=text]:focus, input[type=email]:focus {
 
           <div class="column1">
             <div class="submit">
-              <button type="submit" class="btn btn-outline-success" style="width: 100%;" href="{% url 'visitor_order_confirm'  product.id %}">Confirm</button><br><br>
+              <button type="submit" class="btn btn-outline-success" style="width: 100%;" href="{% url 'pending_order' %}">Confirm</button><br><br>
               <button type="reset" class="btn btn-outline-warning" style="width: 100%;">Reset</button><br><br>
               <p style="color: red; padding-left: 20px; padding-right: 20px;">*Terms and Conditions :- Product is not shipped or delevered by this website, It is only through {{product.seller.garden}}.</p>
             </div>

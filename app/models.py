@@ -226,6 +226,10 @@ class Order(models.Model):
     def __self__(self):
         return self.id
 
+    @property
+    def get_garden(self):
+        return self.product.seller.garden
+
 class Pay(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)

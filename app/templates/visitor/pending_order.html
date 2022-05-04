@@ -1,0 +1,62 @@
+{% extends "visitor/visitor_market_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load mathfilters %}
+
+<style>
+#featured{
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-top: 20px;
+  }
+
+  .column{
+    width: 400px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .content-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+</style>
+
+<div class="content">
+    {% for o in order %}
+    <div class="content-wrapper">
+        <div class="column">
+          <img id="featured" src="{{o.product.image_1.url}}" >
+          <h4 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-top: 10px;"><a style="color: #252525;"><b>{{o.product.product_name}}</b></a></h4>
+        </div>
+        <div class="column" style="text-align: left; padding-left: 80px;">
+            <p><b>₹.{{o.product.price}}/<sub style="font-size: 18px;">{{o.product.price_per_quantity}}</sub></b></p>
+            <p><b>{{o.product.category}}</b></p>
+            <p>Product by <b>{{o.product.seller.garden}}</b></p>
+            <p>Ordered on <b>{{o.order_on}}</b></p>
+            <p>Total Amount <b>₹{{o.product.price|mul:o.quantity|add:25}}</b></p>
+        </div>
+        <div class="column">
+            {% if o.payment is False %}<p style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; color: orange;">Payment is still Pending</p>{% endif %}
+
+            {% if o.product.stock is True %}{% if o.payment is False %}<a type="button" class="btn btn-outline-success" href="{% url 'visitor_order_confirm'  o.id %}" style="width: 100%;">Go to Payment Page</a><br><br>{% endif %}{% endif %}
+            {% if o.product.stock is False %}{% if o.payment is False %}<a type="button" class="btn btn-outline-warning" href=# style="width: 100%;">Out of Stock</a><br><br>{% endif %}{% endif %}
+
+            {% if o.payment is False %}<a type="button" class="btn btn-outline-danger" href="{% url 'remove_order' %}?order_id={{o.pk}}" style="width: 100%;">Remove Order</a><br><br>{% endif %}
+        </div>
+    </div><hr>
+    {% empty %}
+    <center>
+        <img src="{% static 'image/empty2.png' %}" width="500" height="400">
+        <p style="text-transform: uppercase; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><b>Still there is no pending order</b></p>
+    </center>
+    {% endfor %}
+</div>
+
+{% endblock %}

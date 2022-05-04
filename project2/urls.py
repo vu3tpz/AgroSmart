@@ -100,14 +100,17 @@ urlpatterns = [
     path('<int:id>/view_product_visitor',view_product_visitor, name='view_product_visitor'),
     
     path('<int:id>/add_cart',add_cart, name='add_cart'),
-
     path('cart',cart, name='cart'),
     path('delete_cart',delete_cart, name='delete_cart'),
 
     path('<int:id>/visitor_order',visitor_order, name='visitor_order'),
     path('<int:id>/visitor_order_confirm',visitor_order_confirm, name='visitor_order_confirm'),
 
+    path('pending_order',pending_order, name='pending_order'),
+    path('remove_order',remove_order, name='remove_order'),
+
     path('your_order',your_order, name='your_order'),
+    path('cancel_order',cancel_order, name='cancel_order'),
 
     #<-----Officer URLs----->
 
@@ -165,6 +168,8 @@ urlpatterns = [
     path('outofstock',outofstock,name='outofstock'),
     path('instock',instock,name='instock'),
     path('delete_product_seller',delete_product_seller,name='delete_product_seller'),
+
+    path('new_order_seller',new_order_seller,name='new_order_seller'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
