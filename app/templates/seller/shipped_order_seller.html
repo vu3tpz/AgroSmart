@@ -1,0 +1,63 @@
+{% extends "seller/seller_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load mathfilters %}
+
+<style>
+#featured{
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-top: 20px;
+  }
+
+  .column{
+    width: 400px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .content-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+</style>
+
+<div class="content">
+  <h1><u><b>Shipped Order</b></u></h1>
+    {% for o,p in zippedList %}
+    {% if o.product.seller.get_garden is user.seller.get_garden %}
+    <div class="content-wrapper">
+        <div class="column">
+          <img id="featured" src="{{o.product.image_1.url}}" >
+          <h4 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-top: 10px;"><a style="color: #252525;"><b>{{o.product.product_name}}</b></a></h4>
+        </div>
+        <div class="column" style="text-align: left; padding-left: 80px;">
+            <p>Ordered by <b>{{o.visitor.get_name}}</b></p>
+            <p>Ordered on <b>{{o.order_on}}</b></p>
+            <p>Payment on <b>{{p.payment_on}}</b></p>
+            <p>Qunatity <b>{{o.quantity}}</b></p>
+            <p>Total Amount <b>₹ {{p.amount}}</b></p>
+        </div>
+        <div class="column">
+            <p>Delevery Address <b>{{o.address}}</b></p><br>
+
+            <a type="button" class="btn btn-outline-success" href="{% url 'delivered_order' %}?order_id={{o.pk}}" style="width: 100%;">Product Delivered</a><br><br>
+        </div>
+    </div><hr>
+    {% endif %}
+    {% empty %}
+    <center style="padding-top: 80px;">
+        <img src="{% static 'image/empty2.png' %}" width="500" height="400">
+        <p style="text-transform: uppercase; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><b>there is no order</b></p>
+    </center>
+    
+    {% endfor %}
+</div>
+
+{% endblock %}

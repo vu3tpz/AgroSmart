@@ -1,0 +1,123 @@
+{% extends "visitor/visitor_market_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<style>
+    .col-sm-10{
+        padding-top: 15px;
+    }
+
+    .button{
+        padding-top: 15px;
+    }
+
+    .form-control{
+        font-weight: bold;
+        border: 2px solid #04AA6D;
+    }
+
+    button.btn-outline-primary:hover{
+        background: #2dc997;
+        border: 1px solid #2dc997;
+    }
+
+    button.btn-outline-primary{
+        font-family: "Poppins", sans-serif;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 1px;
+        transition: 0.5s;
+        border: 2px solid #04AA6D;
+        color: #04AA6D;
+        border-color: #04AA6D;
+    }
+
+    .featured__item {
+            margin-bottom: 50px;
+        }
+
+        .featured__item:hover .featured__item__pic .featured__item__pic__hover {
+            bottom: 20px;
+        }
+
+        .featured__item__pic {
+            height: 270px;
+            position: relative;
+            overflow: hidden;
+            background-position: center;
+            padding-top: 15px;
+        }
+
+        .featured__item__pic__hover {
+            position: absolute;
+            left: 0;
+            bottom: -50px;
+            width: 100%;
+            text-align: center;
+            -webkit-transition: all, 0.5s;
+            -moz-transition: all, 0.5s;
+            -ms-transition: all, 0.5s;
+            -o-transition: all, 0.5s;
+            transition: all, 0.5s;
+        }
+
+        .featured__item__pic__hover li {
+            list-style: none;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .featured__item__text {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .featured__item__text h6 {
+            margin-bottom: 5px;
+        }
+
+        .featured__item__text h6 a {
+            color: #252525;
+        }
+
+        .featured__item__text h5 {
+            color: #252525;
+            font-weight: 700;
+        }
+
+        .featured__item__pic {
+            height: 270px;
+            position: relative;
+            overflow: hidden;
+            background-position: center center;
+        }
+
+</style>
+
+<!-- Page content -->
+<div class="content">
+
+    <h1 style="text-align: center;"><b><u>Vegetables</u></b></h1>
+    {% for v in veg %}
+    <div class="col-lg-3 col-md-4 col-sm-6 " style="display: inline-block; width: 24%;">
+        <div class="featured__item">
+            <div class="featured__item__pic set-bg" style="background-image: url('{{v.image_1.url}}'); background-size: cover;">
+            </div>
+            <div class="featured__item__text">
+                <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'view_product_visitor'  v.id %}" ><b>{{v.product_name}}</b></a></h6>
+                <h5 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><b>₹{{v.price}}</b></h5>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <center>
+        <img src="{% static 'image/empty1.png' %}" width="450" height="400">
+        <p style="text-transform: uppercase; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><b>No Products in this category</b></p>
+    </center>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

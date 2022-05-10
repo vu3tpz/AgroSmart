@@ -28,15 +28,46 @@
 
     <div class="sidebar">
         <a href="{% url 'visitor_market_home' %}"><i class="fas fa-home"></i>Home</a>
-        <a href="{% url 'search' %}"><i class="fas fa-home"></i>Search</a>
-        <a href="{% url 'cart' %}"><i class="fas fa-home"></i>Cart<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ cart_count }}</span></a>
-        <a href="{% url 'pending_order' %}"><i class="fas fa-home"></i>Pending Order<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ order_count }}</span></a>
-        <a href="{% url 'your_order' %}"><i class="fas fa-home"></i>Your Order<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ pay_count }}</span></a>
+        <a href="{% url 'search' %}"><i class="fas fa-search"></i>Search</a>
+        <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i>Cart<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ cart_count }}</span></a>
+        <a href="{% url 'pending_order' %}"><i class="far fa-credit-card" style="padding-right: 10px;"></i>Payment in Pending<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ order_count }}</span></a>
+        <a href="{% url 'your_order' %}"><i class="fas fa-shopping-bag"></i>Your Order<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ pay_count }}</span></a>
+
+        <button class="dropdown-btn"><i class="fas fa-layer-group"></i>Category<i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{% url 'vegetable_cat' %}"><i class="fas fa-carrot"></i>Vegetable</a>
+            <a href="{% url 'fruit_cat' %}"><i class="fas fa-apple-alt"></i>Fruits</a>
+            <a href="{% url 'spices_cat' %}"><i class="fas fa-pepper-hot"></i>Spices</a>
+            <a href="{% url 'bio_cat' %}"><i class="fas fa-leaf"></i>Bio Fertilizer</a>
+            <a href="{% url 'nut_cat' %}"><i class="fas fa-leaf"></i>Nuts</a>
+            <a href="{% url 'seed_cat' %}"><i class="fas fa-spa"></i>Seed</a>
+        </div>
+
+        <a href="{% url 'visitor_home' %}"><i class="far fa-arrow-alt-circle-left"></i>Find More</a>
 
         <div class="logout">
             <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
+
+    <script>
+        //* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } 
+                else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
 
     {% block content %}
 
@@ -199,7 +230,7 @@
                         <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic2.jpg'); background-size: cover;">
                         </div>
                         <div class="featured__item__text">
-                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>Vegitables</b></a></h6>
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'vegetable_cat' %}"><b>Vegetables</b></a></h6>
                         </div>
                     </div>
                 </div>
@@ -209,7 +240,7 @@
                         <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic3.jpg'); background-size: cover;">
                         </div>
                         <div class="featured__item__text">
-                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>Fruits</b></a></h6>
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'fruit_cat' %}"><b>Fruits</b></a></h6>
                         </div>
                     </div>
                 </div>
@@ -219,7 +250,7 @@
                         <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic4.jpg'); background-size: cover;">
                         </div>
                         <div class="featured__item__text">
-                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>seeds</b></a></h6>
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'seed_cat' %}"><b>seeds</b></a></h6>
                         </div>
                     </div>
                 </div>
@@ -229,7 +260,7 @@
                         <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic5.jpg'); background-size: cover;">
                         </div>
                         <div class="featured__item__text">
-                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>bio fertilizers</b></a></h6>
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'bio_cat' %}"><b>bio fertilizers</b></a></h6>
                         </div>
                     </div>
                 </div>
@@ -239,7 +270,7 @@
                         <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic7.jpg'); background-size: cover;">
                         </div>
                         <div class="featured__item__text">
-                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>Nuts</b></a></h6>
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'nut_cat' %}"><b>Nuts</b></a></h6>
                         </div>
                     </div>
                 </div>
@@ -249,7 +280,7 @@
                         <div class="featured__item__pic set-bg" style="background-image: url('../static/image/agropic8.jpg'); background-size: cover;">
                         </div>
                         <div class="featured__item__text">
-                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>spices</b></a></h6>
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'spices_cat' %}"><b>spices</b></a></h6>
                         </div>
                     </div>
                 </div>
@@ -274,7 +305,7 @@
                         <div class="featured__item__pic set-bg" style="background-image: url('{{s.logo.url}}'); background-size: cover;">
                         </div>
                         <div class="featured__item__text">
-                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="#"><b>{{s.garden}}</b></a></h6>
+                            <h6 style="text-transform: uppercase; font-family: Cairo, sans-serif;"><a href="{% url 'visitor_view_seller'  s.id %}"><b>{{s.garden}}</b></a></h6>
                         </div>
                     </div>
                 </div>

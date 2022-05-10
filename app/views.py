@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from pyparsing import empty
 from .models import *
@@ -22,9 +23,6 @@ def index(request):
 
 def about(request):
     return render(request, 'about.html')
-
-def contact(request):
-    return render(request, 'contact.html')
 
 #<-----For check user is Admin, Visitor and Officer----->#
 def is_admin(user):
@@ -530,23 +528,6 @@ def visitor_find_crop(request):
         form=FindCropForm()
     return render(request, 'visitor/visitor_find_crop.html',{'form':form,'result':result})
 
-#<-----Add Crop Detail By Visitor----->#
-@login_required(login_url='visitor_login')
-@user_passes_test(is_visitor)
-def visitor_add_crop(request):
-    if request.method=='POST':
-        form=CropAddForm(request.POST)
-        if form.is_valid():
-            user=form.save()
-            user.save()
-
-            messages.success(request, 'Your Contibution send for Verification, If detail is genuine it may reflect in Soil after 24 Hours..')
-
-            return HttpResponseRedirect('visitor_home')
-    else:
-        form=CropAddForm()
-    return render(request, 'visitor/visitor_add_crop.html',{'form':form})
-
 #<-----Request seed by Visitor----->#
 @login_required(login_url='visitor_login')
 @user_passes_test(is_visitor)
@@ -628,7 +609,7 @@ def visitor_market_home(request):
     pay_count = Order.objects.all().filter(visitor=visitor, payment=True).count()
     return render(request, 'visitor/visitor_market_home.html',{'seller':seller,'cart_count':cart_count,'order_count':order_count,'pay_count':pay_count})
 
-#<-----Visitor Virtual Market Home----->#
+#<-----Visitor Virtual Market Search----->#
 @login_required(login_url='visitor_login')
 @user_passes_test(is_visitor)
 def search(request):
@@ -638,6 +619,48 @@ def search(request):
         search = request.POST.get('search')
         product = Product.objects.all().filter(status=True,activity=True,product_name=search)
     return render(request, 'visitor/search.html',{'search':search,'product':product})
+
+#<-----Visitor Virtual Market Vegitable category----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def vegetable_cat(request):
+    veg = Product.objects.all().filter(status=True,activity=True,category="Vegetable")
+    return render(request, 'visitor/vegetable_cat.html',{'veg':veg})
+
+#<-----Visitor Virtual Market Fruits category----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def fruit_cat(request):
+    fru = Product.objects.all().filter(status=True,activity=True,category="Fruit")
+    return render(request, 'visitor/fruit_cat.html',{'fru':fru})
+
+#<-----Visitor Virtual Market Seeds category----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def seed_cat(request):
+    seed = Product.objects.all().filter(status=True,activity=True,category="Seed")
+    return render(request, 'visitor/seed_cat.html',{'seed':seed})
+
+#<-----Visitor Virtual Market Bio Fertilizer category----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def bio_cat(request):
+    bio = Product.objects.all().filter(status=True,activity=True,category="Bio Fertilizer")
+    return render(request, 'visitor/bio_cat.html',{'bio':bio})
+
+#<-----Visitor Virtual Market Nuts category----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def nut_cat(request):
+    nut = Product.objects.all().filter(status=True,activity=True,category="Nuts")
+    return render(request, 'visitor/nut_cat.html',{'nut':nut})
+
+#<-----Visitor Virtual Market Spices category----->#
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def spices_cat(request):
+    spi = Product.objects.all().filter(status=True,activity=True,category="Spices")
+    return render(request, 'visitor/spices_cat.html',{'spi':spi})
 
 #<-----Visitor Detail view of product----->#
 @login_required(login_url='visitor_login')
@@ -751,6 +774,15 @@ def cancel_order(request):
     order.save()
     return redirect(reverse('your_order'))
 
+@login_required(login_url='visitor_login')
+@user_passes_test(is_visitor)
+def visitor_view_seller(request, id):
+    products=''
+    sellers = Seller.objects.all().get(id=id)
+    products = Product.objects.all().filter(seller=id,status=True)
+    data={'sellers':sellers,'products':products}
+    return render(request, 'visitor/visitor_view_seller.html',data)
+
 #<---------------------------------------------->#
 #<---------------Officer Functions-------------->#
 #<---------------------------------------------->#
@@ -855,7 +887,7 @@ def officer_add_soil(request):
             user.status=True
             user.save()
 
-            messages.success(request, 'Soil Save Sucssesfully..')
+            messages.success(request, 'Locations Soil Details Added Sucssesfully..')
 
             return HttpResponseRedirect('officer_active_soil')
     else:
@@ -893,28 +925,6 @@ def officer_add_soil_detail(request):
         form=SoilDetailAddForm()
     return render(request, 'officer/officer_add_soil_detail.html',{'form':form})
 
-#<-----Officer Approvall for Soils----->#
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def officer_approve_soil(request):
-    soils = SoilLocationDetail.objects.all().filter(status=False)
-    return render(request, 'officer/officer_approve_soil.html',{'soils':soils})
-
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def approve_soil(request):
-    soil=get_object_or_404(SoilLocationDetail, pk=request.GET.get('soil_id'))
-    soil.status=True
-    soil.save()
-    return redirect(reverse('officer_approve_soil'))
-
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def delete_soil(request):
-    soil=get_object_or_404(SoilLocationDetail, pk=request.GET.get('soil_id'))
-    soil.delete()
-    return redirect(reverse('officer_approve_soil'))
-
 #<-----Active Detail of Rainfall View for Officer----->#
 @login_required(login_url='officer_login')
 @user_passes_test(is_officer)
@@ -945,60 +955,6 @@ def officer_add_rainfall(request):
     else:
         form=RainfallDetailAddForm()
     return render(request, 'officer/officer_add_rainfall.html',{'form':form})
-
-#<-----Active Crop for Officer----->#
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def officer_active_crop(request):
-    crops = CropDetail.objects.all().filter(status=True)
-    return render(request, 'officer/officer_active_crop.html',{'crops':crops})
-
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def delete_crop_active(request):
-    crop=get_object_or_404(CropDetail, pk=request.GET.get('crop_id'))
-    crop.delete()
-    return redirect(reverse('officer_active_crop'))
-
-#<-----Add Crop Detail By Officer----->#
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def officer_add_crop(request):
-    if request.method=='POST':
-        form=CropAddForm(request.POST)
-        if form.is_valid():
-            user=form.save()
-            user.status=True
-            user.save()
-
-            messages.success(request, 'Crop Detail Save Sucssesfully..')
-
-            return HttpResponseRedirect('officer_active_crop')
-    else:
-        form=CropAddForm()
-    return render(request, 'officer/officer_add_crop.html',{'form':form})
-
-#<-----Officer Approvall for Crop----->#
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def officer_approve_crop(request):
-    crops = CropDetail.objects.all().filter(status=False)
-    return render(request, 'officer/officer_approve_crop.html',{'crops':crops})
-
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def approve_crop(request):
-    crop=get_object_or_404(CropDetail, pk=request.GET.get('crop_id'))
-    crop.status=True
-    crop.save()
-    return redirect(reverse('officer_approve_crop'))
-
-@login_required(login_url='officer_login')
-@user_passes_test(is_officer)
-def delete_crop(request):
-    crop=get_object_or_404(CropDetail, pk=request.GET.get('crop_id'))
-    crop.delete()
-    return redirect(reverse('officer_approve_crop'))
 
 #<-----Request for seed View for Officer----->#
 @login_required(login_url='officer_login')
@@ -1098,7 +1054,7 @@ def seller_signup(request):
             my_seller_group=Group.objects.get_or_create(name='SELLER')
             my_seller_group[0].user_set.add(user)
 
-            messages.success(request, 'Request send for approval, If request is accept we send you a Email..')
+            messages.success(request, 'Request send for process, please wait for Approval..')
 
             return HttpResponseRedirect('/')
     else:
@@ -1134,6 +1090,28 @@ def seller_login(request):
 @user_passes_test(is_seller)
 def seller_home(request):
     return render(request, 'seller/seller_home.html')
+
+#<-----Profile Page for Seller----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def seller_profile(request):
+    return render(request, 'seller/seller_profile.html')
+
+#<-----Change password----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def change_password_seller(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('seller_home')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'seller/change_password_seller.html', {'form': form})
 
 #<-----Seller product page----->#
 @login_required(login_url='seller_login')
@@ -1216,5 +1194,60 @@ def delete_product_seller(request):
 @login_required(login_url='seller_login')
 @user_passes_test(is_seller)
 def new_order_seller(request):
-    orders = Order.objects.all().filter(payment=True)
+    orders = Order.objects.all().filter(payment=True, shipped=False, order=True)
     return render(request, 'seller/new_order_seller.html',{'orders':orders})
+
+#<-----detail new order seller----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def detail_new_order_seller(request, id):
+    order = Order.objects.all().get(id=id)
+    pay = Pay.objects.all().get(order_id=order)
+    return render(request, 'seller/detail_new_order_seller.html',{'order':order,'pay':pay})
+
+#<-----Package Shipped----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def shipped_package(request):
+    order=get_object_or_404(Order, pk=request.GET.get('order_id'))
+    order.shipped=True
+    order.save()
+    return redirect(reverse('new_order_seller'))
+
+#<-----Shipped Order----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def shipped_order_seller(request):
+    orders = Order.objects.all().filter(payment=True, shipped=True, order=True)
+    pay = Pay.objects.all().filter(order__in=orders)
+    zippedList = zip(orders, pay)
+    return render(request, 'seller/shipped_order_seller.html',{'zippedList':zippedList})
+
+#<-----Package Shipped----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def delivered_order(request):
+    order=get_object_or_404(Order, pk=request.GET.get('order_id'))
+    order.shipped=False
+    order.delivered=True
+    order.order=False
+    order.save()
+    return redirect(reverse('shipped_order_seller'))
+
+#<-----Delivered Order----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def delivered_order_seller(request):
+    orders = Order.objects.all().filter(payment=True, delivered=True, order=False)
+    pay = Pay.objects.all().filter(order__in=orders)
+    zippedList = zip(orders, pay)
+    return render(request, 'seller/delivered_order_seller.html',{'zippedList':zippedList})
+
+#<-----Canceled Order----->#
+@login_required(login_url='seller_login')
+@user_passes_test(is_seller)
+def canceled_order_seller(request):
+    orders = Order.objects.all().filter(payment=True, delivered=False, order=False)
+    pay = Pay.objects.all().filter(order__in=orders)
+    zippedList = zip(orders, pay)
+    return render(request, 'seller/canceled_order_seller.html',{'zippedList':zippedList})

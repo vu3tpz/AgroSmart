@@ -143,11 +143,11 @@
 
           <div class="column">
             <h1 style="text-transform: uppercase; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: left;"><b>{{products.product_name}}</b></h1><p><b>({{products.category}})</b></p><hr>
-            <h2><b>₹.{{products.price}}/<sub style="font-size: 18px;">{{products.price_per_quantity}}</sub></b></h2><br>
+            <h2><b>₹{{products.price}}/<sub style="font-size: 18px;">{{products.price_per_quantity}}</sub></b></h2><br>
             <p>{{products.describe}}</p>
             <p>Add on <b>{{products.joindate}}</b></p><hr>
             <div class="media">
-              <img class="rounded-circle" src="{{products.seller.logo.url}}" alt="Garden Logo" style="object-fit: cover; width: 75px; height: 75px;">
+              <img class="rounded-circle border border-success" src="{{products.seller.logo.url}}" alt="Garden Logo" style="object-fit: cover; width: 75px; height: 75px;">
               <div class="media-body">
                 <p style="padding-left: 70px;">Add by <b><a>{{products.seller.garden}}</b></p>
                 <p style="padding-left: 70px;">District <b>{{products.seller.district}}</b></p>

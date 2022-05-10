@@ -33,7 +33,6 @@
                 <th scope="col">District</th>
                 <th scope="col">Rainfall (in cm)</th>
                 <th scope="col">Year</th>
-                <th scope="col">Add On</th>
                 <th scope="col">Delete</th>
             </tr>
         </thead>
@@ -44,7 +43,6 @@
                 <td>{{r.district}}</td>
                 <td>{{r.rainfall}}</td>
                 <td>{{r.year}}</td>
-                <td>{{r.addon}}</td>
                 <td><a class="btn btn-danger" href="{% url 'delete_rainfall_active' %}?rainfall_id={{r.pk}}">Delete</a></td>
             </tr>
             {% endfor %}

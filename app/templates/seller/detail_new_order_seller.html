@@ -1,0 +1,106 @@
+{% extends "seller/seller_home.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load mathfilters %}
+<link rel="stylesheet" type="text/css" href="{% static 'seller/product.css' %}">
+
+<style>
+
+    #featured{
+        max-width: 300px;
+        max-height: 400px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 5px;
+        padding-top: 20px;
+      }
+    
+      .column{
+        width: 400px;
+        padding: 5px;
+        text-align: center;
+      }
+    
+      .column1{
+        width: 49%;
+        padding: 10px;
+      }
+
+
+      .content-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+label{
+    font-weight: bold;
+}
+
+input[type=text]{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus {
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+.form-control{
+    width: 100%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    font-weight: bold;
+    border: 1px solid black;
+    background: #f1f1f1;
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+}
+    
+    </style>
+
+<div class="content">
+    <div class="content-wrapper">
+        <div class="column">
+          <img id="featured" src="{{order.product.image_1.url}}" >
+          <h4 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-top: 10px;"><b>{{order.product.product_name}}</b></h4>
+        </div>
+        <div class="column" style="text-align: left; padding-left: 100px;">
+            <p><b>₹.{{order.product.price}}/<sub style="font-size: 18px;">{{order.product.price_per_quantity}}</sub></b></p>
+            <p>Quantity <b>{{order.quantity}}</b></p>
+            <p><b>{{order.product.category}}</b></p>
+            <p>Product by <b>{{order.product.seller.garden}}</b></p>
+            <p>Quantity <b>{{pay.payment_on}}</b></p>
+        </div>
+        <div class="column">
+            <p>{{order.product.describe}}</p>
+        </div>
+    </div><hr>
+
+    <h3 style="text-transform: uppercase; font-family: Cairo, sans-serif; text-align: center; padding-bottom: 15px;"><b><u>Details</u></b></h3>
+    <div class="content-wrapper">
+        <div class="column">
+            <p>Name <b>{{order.visitor.get_name}}</b></p>
+            <p>Email id <b>{{order.visitor.email}}</b></p>
+        </div>
+        <div class="column">
+            <p>Delevery Address <b>{{order.address}}</b></p>
+            <p>District <b>{{order.visitor.district}}</b></p>
+        </div>
+        <div class="column" style="text-align: right; padding-right: 100px;">
+            <p style="text-transform: uppercase;">Total Amount : <b>₹{{pay.amount}}</b></p><hr>
+            <a class="btn btn-outline-warning" style="width: 100%;" href="{% url 'shipped_package' %}?order_id={{order.pk}}">Package Shipped</a>
+        </div>
+    </div><hr>
+
+</div>
+
+{% endblock %}

@@ -25,14 +25,12 @@
 
     <div class="sidebar">
         <a href="{% url 'seller_home' %}"><i class="fas fa-home"></i>Home</a>
-        <a href=#><i class="fas fa-home"></i>Profile</a>
-        <a href="{% url 'product' %}"><i class="fas fa-home"></i>Product</a>
-        <a href="{% url 'new_order_seller' %}"><i class="fas fa-home"></i>New Order</a>
-        <a href=#><i class="fas fa-home"></i>Shipped Order</a>
-        <a href=#><i class="fas fa-home"></i>Delivered Order</a>
-        <a href=#><i class="fas fa-home"></i>Canceled Order</a>
-        <a href=#><i class="fas fa-home"></i>Reviews</a>
-        <a href=#><i class="fas fa-home"></i>Contact</a>
+        <a href="{% url 'seller_profile' %}"><i class="fas fa-address-card"></i>Profile</a>
+        <a href="{% url 'product' %}"><i class="fas fa-shopping-bag"></i>Product</a>
+        <a href="{% url 'new_order_seller' %}"><i class="fas fa-cart-plus"></i>New Order</a>
+        <a href="{% url 'shipped_order_seller' %}"><i class="fas fa-truck"></i>Shipped Order</a>
+        <a href="{% url 'delivered_order_seller' %}"><i class="far fa-check-circle"></i>Delivered Order</a>
+        <a href="{% url 'canceled_order_seller' %}"><i class="fas fa-ban"></i>Canceled Order</a>
 
         <div class="logout">
             <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>

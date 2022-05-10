@@ -1,0 +1,113 @@
+{% extends "admin/admin_home.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+
+    .content-wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .column{
+      width: 500px;
+      padding: 10px;
+    }
+
+    img.featured{
+    width: 450px;
+    height: 450px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-top: 20px;
+  }
+
+  #slide-wrapper{
+          max-width: 100%;
+          display: flex;
+          min-height: 100px;
+          align-items: center;
+          padding-top: 10px;
+        }
+    
+        #slider{
+          width: 95%;
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: hidden;
+        }
+    
+        .arrow{
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+          transition: .3s;
+        }
+    
+        .arrow:hover{
+          opacity: .5;
+          width: 45px;
+          height: 45px;
+        }
+
+        .featured__item__text h6 {
+            margin-bottom: 10px;
+        }
+
+        .featured__item__text h6 a {
+            color: #252525;
+        }
+
+        .featured__item__text h5 {
+            color: #252525;
+            font-weight: 700;
+        }
+
+        .featured__item__pic {
+            height: 270px;
+            position: relative;
+            overflow: hidden;
+            background-position: center center;
+        }
+
+        .featured__item__text {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+</style>
+
+    <!-- Page content -->
+    <div class="content">
+        <div class="content-wrapper">
+            <div class="column">
+                <img src="{{user.seller.logo.url}}" class="featured" alt="...">
+                <h3 class="card-title"><b><u>{{user.seller.garden}}</u></b></h3>
+                <p class="card-text"><i>{{user.seller.describe}}</i></p>
+            </div>
+
+            <div class="column">
+                <h1>{{user.seller.garden}}</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p>Owened by <b>{{user.seller.get_name}}</b></p>
+                            <p>Username <b>{{user.seller.user}}</b></p>
+                            <p>Email id <b>{{user.seller.email}}</b></p>
+                            <p>Gender <b>{{user.seller.gender}}</b></p>
+                            <p>District <b>{{user.seller.district}}</b></p>
+                        </div>
+                        <div class="col">
+                            <p>Join On <b>{{user.seller.joindate}}</b></p>
+                            <p>Address: <b>{{user.seller.address|linebreaks}}</b></p>
+                        </div>
+                    </div>
+                </div><hr>
+                <a type="button" class="btn btn-outline-warning" href="{% url 'change_password_seller' %}" style="width: 100%;">Change Password</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

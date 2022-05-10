@@ -23,30 +23,38 @@
         <h1><u><b>Verified Soils</b></u></h1>
 
         <div class="addsoil">
-            <a class="btn btn-success" href="{% url 'officer_add_soil' %}"><i class="fas fa-plus-circle"></i>Add Location of Soil</a>
+            <a class="btn btn-success" href="{% url 'officer_add_soil' %}"><i class="fas fa-plus-circle"></i>Add Soil Details in Location</a>
         </div>
 
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">SL NO.</th>
                     <th scope="col">District</th>
-                    <th scope="col">Region</th>
-                    <th scope="col">Soil</th>
-                    <th scope="col">Added Date</th>
-                    <th scope="col">Delete Soil</th>
+                    <th scope="col">Taluk</th>
+                    <th scope="col">Organic Carbon</th>
+                    <th scope="col">Phosphorous</th>
+                    <th scope="col">Potassium</th>
+                    <th scope="col">Manganese</th>
+                    <th scope="col">Sulphur</th>
+                    <th scope="col">Ph value</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
                 {% for s in soils %}
                 <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
                     <td>{{s.district}}</td>
                     <td>{{s.region}}</td>
-                    <td>{{s.soil}}</td>
-                    <td>{{s.addon}}</td>
+                    <td>{{s.organic_carbon}} %</td>
+                    <td>{{s.phosphorous}} Kg/Ha</td>
+                    <td>{{s.potassium}} Kg/Ha</td>
+                    <td>{{s.manganese}} ppm</td>
+                    <td>{{s.sulphur}} ppm</td>
+                    <td>{{s.ph_value}}</td>
                     <td><a class="btn btn-danger" href="{% url 'delete_soil_active' %}?soil_id={{s.pk}}">Delete</a></td>
                 </tr>
+                {% empty %}
+                    <td><b>Nothing to show</b></td>
                 {% endfor %}
             </tbody>
         </table>

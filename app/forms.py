@@ -1,6 +1,4 @@
 from sre_constants import CATEGORY
-from urllib import request
-from attr import attrs
 from django import forms
 from django.contrib.auth.models import User
 from .models import *
@@ -179,11 +177,16 @@ class OfficerLoginForm(forms.Form):
 class SoilAddForm(forms.ModelForm):
     district = forms.ModelChoiceField(queryset=District.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select District---", required=True)
     region = forms.ModelChoiceField(queryset=Region.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---------------------", required=True)
-    soil = forms.ModelChoiceField(queryset=Soil.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select Soil---", required=True)
+    organic_carbon = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Organic Carban'}), required=True)
+    phosphorous = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Phosphorous in Kg/Ha'}), required=True)
+    potassium = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Potassium in ppm'}), required=True)
+    manganese = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Manganese in ppm'}), required=True)
+    sulphur = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Sulphur in ppm'}), required=True)
+    ph_value = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter PH value'}), required=True)
 
     class Meta:
         model=SoilLocationDetail
-        fields=['district','region','soil']
+        fields=['district','region','organic_carbon','phosphorous','potassium','manganese','sulphur','ph_value']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -230,18 +233,6 @@ class FindSoilDetailForm(forms.Form):
 class FindRainfallForm(forms.Form):
     district = forms.ModelChoiceField(queryset=District.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select District---", required=True)
 
-#<-----Add Soil Detail Form----->#
-class CropAddForm(forms.ModelForm):
-    crop = forms.ModelChoiceField(queryset=Crop.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select Crop---", required=True)
-    soil = forms.ModelChoiceField(queryset=Soil.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="---Select Soil---", required=True)
-    min_rainfall = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Add Minimun Rainfall (in Centimeter)'}), required=True)
-    max_rainfall = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Add Maximun Rainfall (in Centimeter)'}), required=True)
-    detail = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder':'Add Detail About Crop'}), required=True)
-
-    class Meta:
-        model=CropDetail
-        fields=['crop','soil','min_rainfall','max_rainfall','detail']
-
 #<-----Find Crop Form----->#
 class FindCropForm(forms.Form):
     nitrogen = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter level of Nitrogen'}), required=True)
@@ -250,7 +241,7 @@ class FindCropForm(forms.Form):
     temperature = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Temperature (in Celsius)'}), required=True)
     humidity = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Humidity'}), required=True)
     ph = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter pH value'}), required=True)
-    rainfall = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Rainfall (in mm)'}), required=True)
+    rainfall = forms.FloatField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Rainfall (in cm)'}), required=True)
 
 #<-----Form for Request Seed----->#
 class RequestSeedForm(forms.Form):
@@ -345,10 +336,12 @@ QUANTITY=(
 
 CATEGORY=(
     ("","---Select Category---"),
-    ("Vegitable","Vegitable"),
+    ("Vegetable","Vegetable"),
     ("Fruit","Fruit"),
     ("Seed","Seed"),
-    ("Homemade Fertilizer","Homemade Fertilizer"),
+    ("Bio Fertilizer","Bio Fertilizer"),
+    ("Nuts","Nuts"),
+    ("Spices","Spices"),
 )
 
 class ProductAddForm(forms.ModelForm):

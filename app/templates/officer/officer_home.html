@@ -30,31 +30,24 @@
 
         <button class="dropdown-btn"><i class="fas fa-seedling"></i>Manage Soil<i class="fas fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="{% url 'officer_active_soil' %}"><i class="fas fa-seedling"></i>View Soil in location</a>
-            <a href="{% url 'officer_active_soil_detail' %}"><i class="fas fa-seedling"></i>View Soils Details</a>
-            <a href="{% url 'officer_approve_soil' %}"><i class="fas fa-cogs"></i>Verify soils location</a>
+            <a href="{% url 'officer_active_soil' %}"><i class="fas fa-map-marked"></i>View Locations Soil detail</a>
+            <a href="{% url 'officer_active_soil_detail' %}"><i class="fab fa-searchengin" style="padding-right: 10px;"></i>View Soils Details</a>
         </div>
 
-        <a href="{% url 'officer_active_rainfall' %}"><i class="fas fa-cloud-showers-heavy"></i>View Rainfall</a>
-        
-        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Manage Crop<i class="fas fa-caret-down"></i></button>
+        <a href="{% url 'officer_active_rainfall' %}"><i class="fas fa-cloud-rain"></i>View Rainfall</a>
+
+        <button class="dropdown-btn"><i class="fas fa-file"></i>Request for Seed<i class="fas fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="{% url 'officer_active_crop' %}"><i class="fas fa-seedling"></i>View Crop</a>
-            <a href="{% url 'officer_approve_crop' %}"><i class="fas fa-cogs"></i>Verify Crop</a>
+            <a href="{% url 'officer_seed_request' %}"><i class="fas fa-file-signature"></i>View Request</a>
+            <a href="{% url 'officer_approve_seed_request' %}"><i class="far fa-check-circle" style="padding-right: 10px;"></i>Approved Request</a>
+            <a href="{% url 'officer_reject_seed_request' %}"><i class="fas fa-ban"></i>Rejected Request</a>
         </div>
 
-        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Request for Seed<i class="fas fa-caret-down"></i></button>
+        <button class="dropdown-btn"><i class="far fa-file" style="padding-right: 10px;"></i>Request for Fertilizer<i class="fas fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="{% url 'officer_seed_request' %}"><i class="fas fa-seedling"></i>View Request</a>
-            <a href="{% url 'officer_approve_seed_request' %}"><i class="fas fa-cogs"></i>Approved Request</a>
-            <a href="{% url 'officer_reject_seed_request' %}"><i class="fas fa-cogs"></i>Rejected Request</a>
-        </div>
-
-        <button class="dropdown-btn"><i class="fas fa-seedling"></i>Request for Fertilizer<i class="fas fa-caret-down"></i></button>
-        <div class="dropdown-container">
-            <a href="{% url 'officer_fertilizer_request' %}"><i class="fas fa-seedling"></i>View Request</a>
-            <a href="{% url 'officer_approve_fertilizer_request' %}"><i class="fas fa-cogs"></i>Approved Request</a>
-            <a href="{% url 'officer_reject_fertilizer_request' %}"><i class="fas fa-cogs"></i>Rejected Request</a>
+            <a href="{% url 'officer_fertilizer_request' %}"><i class="fas fa-file-signature"></i>View Request</a>
+            <a href="{% url 'officer_approve_fertilizer_request' %}"><i class="far fa-check-circle" style="padding-right: 10px;"></i>Approved Request</a>
+            <a href="{% url 'officer_reject_fertilizer_request' %}"><i class="fas fa-ban"></i>Rejected Request</a>
         </div>
 
         <div class="logout">
@@ -97,7 +90,7 @@
                         <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approve soil</b></U></h5>
                         <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Soils...</b></p>
-                        <a href="{% url 'officer_approve_soil' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        <a href="#" class="btn btn-outline-dark"><b>Go There</b></a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +101,7 @@
                         <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approval Crop</b></U></h5>
                         <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Crops...</b></p>
-                        <a href="{% url 'officer_approve_crop' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        <a href="#" class="btn btn-outline-dark"><b>Go There</b></a>
                         </div>
                     </div>
                 </div>

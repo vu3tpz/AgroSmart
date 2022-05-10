@@ -1,8 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from djongo import models
 from django.contrib.auth.models import User
-from decimal import Decimal
-from django.db.models import F, Sum
 
 # Create your models here.
 
@@ -97,7 +95,12 @@ class Soil(models.Model):
 class SoilLocationDetail(models.Model):
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     region = models.OneToOneField(Region, on_delete=models.CASCADE)
-    soil = models.ForeignKey(Soil, on_delete=models.CASCADE)
+    organic_carbon = models.FloatField()
+    phosphorous = models.FloatField()
+    potassium = models.FloatField()
+    manganese = models.FloatField()
+    sulphur = models.FloatField()
+    ph_value = models.FloatField()
     addon = models.DateField(auto_now_add=True)
     status = models.BooleanField(default=False)
 
@@ -116,18 +119,6 @@ class RainfallDetail(models.Model):
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     year = models.ForeignKey(Year, on_delete=models.CASCADE)
     rainfall =models.FloatField()
-    addon = models.DateField(auto_now_add=True)
-
-    def __self__(self):
-        return self.id
-
-class CropDetail(models.Model):
-    crop = models.OneToOneField(Crop, on_delete=models.CASCADE)
-    soil = models.ForeignKey(Soil, on_delete=models.CASCADE)
-    min_rainfall = models.FloatField(10)
-    max_rainfall = models.FloatField(10)
-    detail = models.CharField(max_length=500)
-    status = models.BooleanField(default=False)
 
     def __self__(self):
         return self.id
@@ -242,5 +233,3 @@ class Pay(models.Model):
 
     def __self__(self):
         return self.id
-
-    

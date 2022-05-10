@@ -25,7 +25,8 @@ urlpatterns = [
     path('',index,name='index'),
     path('logout',LogoutView.as_view(next_page='/'),name='logout'),
     path('about',about,name='about'),
-    path('contact',contact,name='contact'),
+
+    path('ajax/load-regions/', load_regions, name='ajax_load_regions'),
 
     #<-----Admin URLs----->
 
@@ -82,7 +83,6 @@ urlpatterns = [
     path('change_password_visitor', change_password_visitor, name='change_password_visitor'),
 
     path('visitor_add_soil', visitor_add_soil, name='visitor_add_soil'),
-    path('visitor_add_crop', visitor_add_crop, name='visitor_add_crop'),
 
     path('visitor_find_soil',visitor_find_soil, name='visitor_find_soil'),
     path('visitor_find_soil_detail',visitor_find_soil_detail, name='visitor_find_soil_detail'),
@@ -112,6 +112,15 @@ urlpatterns = [
     path('your_order',your_order, name='your_order'),
     path('cancel_order',cancel_order, name='cancel_order'),
 
+    path('vegetable_cat',vegetable_cat, name='vegetable_cat'),
+    path('fruit_cat',fruit_cat, name='fruit_cat'),
+    path('seed_cat',seed_cat, name='seed_cat'),
+    path('bio_cat',bio_cat, name='bio_cat'),
+    path('nut_cat',nut_cat, name='nut_cat'),
+    path('spices_cat',spices_cat, name='spices_cat'),
+
+    path('<int:id>/visitor_view_seller',visitor_view_seller, name='visitor_view_seller'),
+
     #<-----Officer URLs----->
 
     path('officer_signup',officer_signup,name='officer_signup'),
@@ -124,22 +133,11 @@ urlpatterns = [
     path('officer_active_soil_detail', officer_active_soil_detail,name='officer_active_soil_detail'),
 
     path('officer_add_soil', officer_add_soil, name='officer_add_soil'),
-    path('officer_approve_soil', officer_approve_soil,name='officer_approve_soil'),
 
     path('officer_active_soil', officer_active_soil,name='officer_active_soil'),
-    path('approve_soil',approve_soil, name='approve_soil'),
-    path('delete_soil',delete_soil, name='delete_soil'),
-
     path('officer_active_rainfall', officer_active_rainfall,name='officer_active_rainfall'),
 
     path('officer_add_rainfall', officer_add_rainfall,name='officer_add_rainfall'),
-
-    path('officer_active_crop', officer_active_crop,name='officer_active_crop'),
-    path('officer_add_crop', officer_add_crop,name='officer_add_crop'),
-
-    path('officer_approve_crop', officer_approve_crop,name='officer_approve_crop'),
-    path('approve_crop', approve_crop, name='approve_crop'),
-    path('delete_crop', delete_crop, name='delete_crop'),
 
     path('officer_seed_request', officer_seed_request,name='officer_seed_request'),
     path('approve_seed_request', approve_seed_request,name='approve_seed_request'),
@@ -153,6 +151,8 @@ urlpatterns = [
     path('reject_fertilizer_request', reject_fertilizer_request,name='reject_fertilizer_request'),
 
     path('delete_soil_active', delete_soil_active, name='delete_soil_active' ),
+    path('delete_rainfall_active', delete_rainfall_active, name='delete_rainfall_active' ),
+    path('delete_soil_detail_active', delete_soil_detail_active, name='delete_soil_detail_active' ),
 
     path('officer_approve_fertilizer_request', officer_approve_fertilizer_request,name='officer_approve_fertilizer_request'),
     path('officer_reject_fertilizer_request', officer_reject_fertilizer_request,name='officer_reject_fertilizer_request'),
@@ -162,6 +162,9 @@ urlpatterns = [
     path('seller_signup',seller_signup,name='seller_signup'),
     path('seller_login',seller_login,name='seller_login'),
     path('seller_home',seller_home,name='seller_home'),
+    path('seller_profile',seller_profile,name='seller_profile'),
+    path('change_password_seller', change_password_seller, name='change_password_seller'),
+
     path('product',product,name='product'),
     path('<int:id>/detail_product_seller',detail_product_seller,name='detail_product_seller'),
     path('add_product',add_product,name='add_product'),
@@ -170,6 +173,12 @@ urlpatterns = [
     path('delete_product_seller',delete_product_seller,name='delete_product_seller'),
 
     path('new_order_seller',new_order_seller,name='new_order_seller'),
+    path('<int:id>/detail_new_order_seller',detail_new_order_seller,name='detail_new_order_seller'),
+    path('shipped_package',shipped_package,name='shipped_package'),
+    path('shipped_order_seller',shipped_order_seller,name='shipped_order_seller'),
+    path('delivered_order',delivered_order,name='delivered_order'),
+    path('delivered_order_seller',delivered_order_seller,name='delivered_order_seller'),
+    path('canceled_order_seller',canceled_order_seller,name='canceled_order_seller'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
