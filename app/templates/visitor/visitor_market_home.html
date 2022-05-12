@@ -29,9 +29,9 @@
     <div class="sidebar">
         <a href="{% url 'visitor_market_home' %}"><i class="fas fa-home"></i>Home</a>
         <a href="{% url 'search' %}"><i class="fas fa-search"></i>Search</a>
-        <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i>Cart<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ cart_count }}</span></a>
-        <a href="{% url 'pending_order' %}"><i class="far fa-credit-card" style="padding-right: 10px;"></i>Payment in Pending<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ order_count }}</span></a>
-        <a href="{% url 'your_order' %}"><i class="fas fa-shopping-bag"></i>Your Order<span class="badge badge-pill badge-danger" style="float: right; font-size:0.9rem;">{{ pay_count }}</span></a>
+        <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
+        <a href="{% url 'pending_order' %}"><i class="far fa-credit-card" style="padding-right: 10px;"></i>Payment in Pending</a>
+        <a href="{% url 'your_order' %}"><i class="fas fa-shopping-bag"></i>Your Order</a>
 
         <button class="dropdown-btn"><i class="fas fa-layer-group"></i>Category<i class="fas fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -211,7 +211,7 @@
     <div class="content">
         <div class="hero__item set-bg" style="background-image: url('../static/image/agropic6.jpg'); width: 100%; background-size: cover;">
             <div class="hero__text">
-                <span>FRUIT FRESH</span>
+                <span>Agro Smart</span>
                 <h2>Vegetable <br>100% Organic</h2>
                 <p>Buy Organic Product near to you.</p>
                 <a href="{% url 'search' %}" class="btn btn-outline-primary">SHOP NOW</a>

@@ -102,7 +102,7 @@
         }
         .hero__text p {
             margin-bottom: 35px;
-            color: #6f6f6f;
+            color: black;
             font-family: "Cairo", sans-serif;
         }  
         a.btn-outline-primary{
@@ -116,13 +116,13 @@
             border-radius: 50px;
             transition: 0.5s;
             margin: 10px;
-            border: 2px solid #7fad39;
-            color: #7fad39;
+            border: 2px solid green;
+            color: green;
         }
 
         a.btn-outline-primary:hover{
-            background: #2dc997;
-            border: 2px solid #2dc997;
+            background: green;
+            border: 2px solid green;
         }
     </style>
     
@@ -143,12 +143,12 @@
             {% endif %}
         </div>
 
-        <div class="hero__item set-bg" style="background-image: url('../static/image/agropic6.jpg'); width: 100%; background-size: cover;">
+        <div class="hero__item set-bg" style="background-image: url('../static/image/agropic11.jpg'); width: 100%; background-size: cover;">
             <div class="hero__text">
-                <span>FRUIT FRESH</span>
-                <h2>Vegetable <br>100% Organic</h2>
-                <p>Buy Organic Product near to you.</p>
-                <a href="{% url 'search' %}" class="btn btn-outline-primary">SHOP NOW</a>
+                <span>Agro Smart</span>
+                <h2>Crop Recommendation</h2>
+                <p>You can find crop That suitable..</p>
+                <a href="{% url 'visitor_find_crop' %}" class="btn btn-outline-primary">Find</a>
             </div>
         </div>
 
@@ -157,8 +157,8 @@
                 <div class="card text-white bg-success mb-3">
                     <div class="card-header">
                         <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Find Soil</b></U></h5>
-                        <p class="card-text"><b>Find Soil of your location, it is more easy to find the soil for your agriculture..</b></p>
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Find Locations soil detail</b></U></h5>
+                        <p class="card-text"><b>You can find detail of soil in your loaction, it is more easy to find the soil is suitable for agriculture..</b></p>
                         <a href="{% url 'visitor_find_soil' %}" class="btn btn-outline-dark"><b>Go There</b></a>
                         </div>
                     </div>
@@ -182,9 +182,9 @@
                 <div class="card text-white bg-info mb-3">
                     <div class="card-header">
                         <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Contribute Soil location details</b></U></h5>
-                        <p class="card-text"><b>Contribute Location in soil details and help user...</b></p>
-                        <a href="#" class="btn btn-outline-dark"><b>Go There</b></a>
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Request for Seed</b></U></h5>
+                        <p class="card-text"><b>You can request seed to Agriculture Officer directly using this website...</b></p>
+                        <a href="{% url 'visitor_get_seed' %}" class="btn btn-outline-dark"><b>Go There</b></a>
                         </div>
                     </div>
                 </div>
@@ -193,9 +193,9 @@
                 <div class="card text-white bg-secondary mb-3">
                     <div class="card-header">
                         <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Contribute Crop details</b></U></h5>
-                        <p class="card-text"><b>Contribute crop details details and help user...</b></p>
-                        <a href="#" class="btn btn-outline-dark"><b>Go There</b></a>
+                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Request for Fertilizer</b></U></h5>
+                        <p class="card-text"><b>You can request seed to Agriculture Officer directly using this website...</b></p>
+                        <a href="{% url 'visitor_get_fertilizer' %}" class="btn btn-outline-dark"><b>Go There</b></a>
                         </div>
                     </div>
                 </div>

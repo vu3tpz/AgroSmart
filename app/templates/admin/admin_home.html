@@ -42,9 +42,62 @@
     
     <!-- Page content -->
     <div class="content">
-        <h1><u><b>Home</b></u></h1>
-        <div class="welcome">
-            <p><b>Agriculture, with its allied sectors, is unquestionably the largest livelihood provider in India, more so in the vast rural areas. It product (GDP). Sustainable agriculture, in terms of food security, rural employment, and environmentally Sustainable technologies such as soil conservation, Sustainable natural resourse management and biodiversity protection, are essential for holistic rural development.</b></p>
+        <style>
+            .hero__item {
+                height: 431px;
+                display: flex;
+                align-items: center;
+                padding-left: 75px;
+            }
+            .hero__text span {
+                font-size: 14px;
+                text-transform: uppercase;
+                font-weight: 700;
+                letter-spacing: 4px;
+                color: #7fad39;
+                font-family: "Cairo", sans-serif;
+            }
+            .hero__text h2 {
+                font-size: 46px;
+                color: #000000;
+                line-height: 52px;
+                font-weight: 700;
+                margin: 10px 0;
+                font-family: "Cairo", sans-serif;
+            }
+            .hero__text p {
+                margin-bottom: 35px;
+                color: black;
+                font-family: "Cairo", sans-serif;
+            }  
+            a.btn-outline-primary{
+                font-family: "Poppins", sans-serif;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-size: 16px;
+                letter-spacing: 1px;
+                display: inline-block;
+                padding: 8px 28px;
+                border-radius: 50px;
+                transition: 0.5s;
+                margin: 10px;
+                border: 2px solid green;
+                color: green;
+            }
+    
+            a.btn-outline-primary:hover{
+                background: green;
+                border: 2px solid green;
+            }
+        </style>
+
+        <div class="hero__item set-bg" style="background-image: url('../static/image/agropic9.jpg'); width: 100%; background-size: cover;">
+            <div class="hero__text">
+                <span>Agro Smart</span>
+                <h2>Manage Visitor</h2>
+                <p>New visitor are waiting for your approval, to access the website..</p>
+                <a href="{% url 'admin_approve_visitor' %}" class="btn btn-outline-primary">Go There</a>
+            </div>
         </div>
 
         <div class="row">
@@ -52,9 +105,9 @@
                 <div class="card text-white bg-success mb-3">
                     <div class="card-header">
                         <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-user-cog"></i><U><b>Verify Visitors</b></U></h5>
-                        <p class="card-text"><b>Visitors are waiting for your Approval to access the Website, Make Fast..</b></p>
-                        <a href="{% url 'admin_approve_visitor' %}" class="btn btn-outline-dark"><b>Go There</b></a>
+                        <h5 class="card-title"><i class="fas fa-user-cog"></i><U><b>Manage seller</b></U></h5>
+                        <p class="card-text"><b>Seller are waiting for your approval, to sell their organic product to visitor..</b></p>
+                        <a href="{% url 'admin_approve_seller' %}" class="btn btn-outline-dark"><b>Go There</b></a>
                         </div>
                     </div>
                 </div>
@@ -63,34 +116,9 @@
                 <div class="card text-white bg-warning mb-3">
                     <div class="card-header">
                         <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-user-cog"></i><U><b>Verify Officers</b></U></h5>
+                        <h5 class="card-title"><i class="fas fa-user-cog"></i><U><b>Manage Officers</b></U></h5>
                         <p class="card-text"><b>Officers are waiting to Help us and Serve People Verify them to server People..</b></p>
                         <a href="{% url 'admin_approve_officer' %}" class="btn btn-outline-dark"><b>Go There</b></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card text-white bg-info mb-3">
-                    <div class="card-header">
-                        <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-seedling"></i><U><b>Approve Soil</b></U></h5>
-                        <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Soils...</b></p>
-                        <a href=# class="btn btn-outline-dark"><b>Go There</b></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card text-white bg-secondary mb-3">
-                    <div class="card-header">
-                        <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-cloud-showers-heavy"></i><U><b>Approve Crop</b></U></h5>
-                        <p class="card-text"><b>Visitors are waiting for approval for there Contribution in Crop...</b></p>
-                        <a href=# class="btn btn-outline-dark"><b>Go There</b></a>
                         </div>
                     </div>
                 </div>
