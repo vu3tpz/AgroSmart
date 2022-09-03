@@ -36,7 +36,7 @@ In AgroSmart you can find Soil nutrient details and you can also find the rainfa
 2. Download and Install [Python](https://www.python.org/) required version.
 
 
-3. Download and Install [MongoDb Community Server](https://www.mongodb.com/try/download/community) and [MongoDb Compass](https://www.mongodb.com/products/compass0) on your system.
+3. Download and Install [MongoDb Community Server](https://www.mongodb.com/try/download/community) and [MongoDb Compass](https://www.mongodb.com/products/compass) on your system.
 
 
 4. Read about [virtualenv](https://docs.python.org/3/tutorial/venv.html) in Python. Create a virtual environment for your project.
