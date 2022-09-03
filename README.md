@@ -30,13 +30,16 @@ In AgroSmart you can find Soil nutrient details and you can also find the rainfa
 
 # How to run Locally 🖥️
 
-1. Before the following steps make sure you have [git](https://git-scm.com/downloads) installed on your system
+1. Before the following steps make sure you have [git](https://git-scm.com/downloads) installed on your system.
 
 
 2. Download and Install [Python](https://www.python.org/) required version.
 
 
-3. Read about [virtualenv](https://docs.python.org/3/tutorial/venv.html) in Python. Create a virtual environment for your project.
+3. Download and Install [MongoDb Community Server](https://www.mongodb.com/try/download/community) and [MongoDb Compass](https://www.mongodb.com/products/compass0 on your system.
+
+
+4. Read about [virtualenv](https://docs.python.org/3/tutorial/venv.html) in Python. Create a virtual environment for your project.
 
 
 ```
@@ -47,7 +50,7 @@ virtualenv virtualenv_name
 ```
 
 
-4. Activate the environment in cmd.
+5. Activate the environment in cmd.
 
 
 ```
@@ -55,7 +58,7 @@ virtualenv_name\scripts\activate
 ```
 
 
-5. Clone the GitHub project in your local directory with command `git clone https://github.com/vu3tpz/AgroSmart` or you can just download the code and unzip it. 
+6. Clone the GitHub project in your local directory with command `git clone https://github.com/vu3tpz/AgroSmart` or you can just download the code and unzip it. 
 
 
 ```
@@ -63,7 +66,7 @@ git clone https://github.com/vu3tpz/AgroSmart
 ```
 
 
-6. Run the command in console `pip install -r requirements.txt`  go to that directory and run the above command. This command will install the necessary packages required to run the project.
+7. Run the command in console `pip install -r requirements.txt`  go to that directory and run the above command. This command will install the necessary packages required to run the project.
 
 
 ```
@@ -71,7 +74,7 @@ pip install -r requirements.txt
 ```
 
 
-7. Go the the directory where `manage.py` file is present. Run following commands in the cmd
+8. Go the the directory where `manage.py` file is present. Run following commands in the cmd
 
 
 ```
@@ -85,7 +88,7 @@ python manage.py runserver
 ```
 
 
-8. See your project is running on your local host `http://127.0.0.1:8000`
+9. See your project is running on your local host `http://127.0.0.1:8000`
 
 
 ```
