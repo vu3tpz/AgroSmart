@@ -12,7 +12,7 @@ In AgroSmart you can find Soil nutrient details and you can also find the rainfa
 
 # Build with ⚒️
 
--> [**Python Django FrameWork**](https://www.djangoproject.com/) | **HTML** | **CSS** | [**Bootstrap**](https://getbootstrap.com/)
+-> [**Python Django FrameWork**](https://www.djangoproject.com/) | **HTML** | **CSS** | **JavaScript** | [**Bootstrap**](https://getbootstrap.com/)
 
 -> [**MongoDB**](https://www.mongodb.com/)
 
